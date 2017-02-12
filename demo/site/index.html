@@ -21,6 +21,11 @@
             </ul>
         </div>
         <hr/>
+        <div id="demo4">
+            <input v-model="inputcontent" />
+            <p>{{echo}}</p>
+        </div>
+        <hr/>
     </body>
     <script type="text/javascript" src="../lib/vue.js"></script>
     <script type="text/javascript">
@@ -42,11 +47,19 @@
                 }
             },
             computed: {
-                reversedMessage:function(){
-                    return [...this.message].reverse().join('');
+                reversedMessage:{
+                    get:function(){
+                        return [...this.message].reverse().join('');
+                    },
+                    set: function(newValue){
+                        this.message = newValue+' changed by set function';
+                    }
                 }
             }
         });
+        setTimeout(function(){
+            vm2.$data.message = 'hello world vue2.0';
+        },1000);
 
         var vm3 = new Vue({
             el:'#demo3',
@@ -60,6 +73,19 @@
             methods:{
                 alarm:function(todo){
                     alert(todo.text+todo.status);
+                }
+            }
+        });
+
+        var vm3 = new Vue({
+            el:'#demo4',
+            data:{
+                inputcontent:'',
+                echo:'Waiting for you input'
+            },
+            watch: {
+                inputcontent: function(value){
+                    this.echo = 'your input is ' + value;
                 }
             }
         });
