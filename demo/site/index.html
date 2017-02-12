@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <title>Document</title>
+    </head>
+    <body>
+        <div id="demo1" v-html="hello"></div>
+        <hr/>
+        <div id="demo2">
+            <p>message:{{message|uppercase}} </p>
+            <p>reversedMessage:{{reversedMessage|uppercase}} </p>
+        </div>
+        <hr/>
+        <div id="demo3">
+            <ul>
+                <li v-for="todo in todos">
+                    {{todo.text}}
+                    <button @click='alarm(todo)'>{{todo.status}}</button>
+                </li>
+            </ul>
+        </div>
+        <hr/>
+    </body>
+    <script type="text/javascript" src="../lib/vue.js"></script>
+    <script type="text/javascript">
+        var  vm = new Vue({
+            el:'#demo1',
+            data:{
+                hello:'<h2>hello world</h2>'
+            }
+        });
+
+        var vm2 = new Vue({
+            el:'#demo2',
+            data:{
+                message:'hello vue'
+            },
+            filters: {
+                uppercase:function(message){
+                    return String.prototype.toLocaleUpperCase.call(message);
+                }
+            },
+            computed: {
+                reversedMessage:function(){
+                    return [...this.message].reverse().join('');
+                }
+            }
+        });
+
+        var vm3 = new Vue({
+            el:'#demo3',
+            data:{
+                todos:[
+                    {text:'记单词', status:'未完成'},
+                    {text:'学习ES6', status:'已完成'},
+                    {text:'学习VUE2', status:'未完成'}
+                ]
+            },
+            methods:{
+                alarm:function(todo){
+                    alert(todo.text+todo.status);
+                }
+            }
+        });
+    </script>
+</html>
