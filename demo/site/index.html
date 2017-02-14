@@ -2,7 +2,15 @@
 <html lang="en">
     <head>
         <meta charset="UTF-8">
-        <title>Document</title>
+        <title>VUE2 DEMOS</title>
+        <style type="text/css">
+            .style1{
+                color: green;
+            }
+            .style2{
+                background-color: blue;
+            }
+        </style>
     </head>
     <body>
         <div id="demo1" v-html="hello"></div>
@@ -26,16 +34,20 @@
             <p>{{echo}}</p>
         </div>
         <hr/>
+        <div id="demo5" v-bind:class='fontColor' v-bind:style="[styles]">
+            {{content}}
+        </div>
     </body>
     <script type="text/javascript" src="../lib/vue.js"></script>
     <script type="text/javascript">
-        var  vm = new Vue({
+        var  vm1 = new Vue({
             el:'#demo1',
             data:{
                 hello:'<h2>hello world</h2>'
             }
         });
 
+        // computed
         var vm2 = new Vue({
             el:'#demo2',
             data:{
@@ -61,6 +73,7 @@
             vm2.$data.message = 'hello world vue2.0';
         },1000);
 
+        // v-on:click
         var vm3 = new Vue({
             el:'#demo3',
             data:{
@@ -77,7 +90,8 @@
             }
         });
 
-        var vm3 = new Vue({
+        // watch
+        var vm4 = new Vue({
             el:'#demo4',
             data:{
                 inputcontent:'',
@@ -86,6 +100,26 @@
             watch: {
                 inputcontent: function(value){
                     this.echo = 'your input is ' + value;
+                }
+            }
+        });
+
+        // v-bind:class v-bind:style
+        var vm5 = new Vue({
+            el:'#demo5',
+            data:{
+                content:'这行字是红色的,背景是黄色的',
+                styles:{
+                    'font-size':'20px',
+                    'background-color':'pink'
+                }
+            },
+            computed:{
+                fontColor: function(){
+                    return {
+                        style1:true,
+                        style2:false
+                    };
                 }
             }
         });
