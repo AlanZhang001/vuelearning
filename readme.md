@@ -1,6 +1,6 @@
 ## VUE学习笔记
 
-### 当前进度：<https://cn.vuejs.org/v2/guide/conditional.html>
+### 当前进度：<https://cn.vuejs.org/v2/guide/list.html>
 
 ### 笔记
 1. Vue.js 支持所有兼容 ECMAScript 5 的浏览器，不支持IE8;

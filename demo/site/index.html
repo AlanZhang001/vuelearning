@@ -37,6 +37,18 @@
         <div id="demo5" v-bind:class='fontColor' v-bind:style="[styles]">
             {{content}}
         </div>
+        <hr/>
+        <div id="demo6">
+            <div v-if='ok'>yes</div>
+            <div v-else>no</div>
+            <template v-if="ok">
+              <h1>Title</h1>
+              <p>Paragraph 1</p>
+              <p>Paragraph 2</p>
+            </template>
+        </div>
+        <hr/>
+
     </body>
     <script type="text/javascript" src="../lib/vue.js"></script>
     <script type="text/javascript">
@@ -121,6 +133,14 @@
                         style2:false
                     };
                 }
+            }
+        });
+
+        // v-if
+        var vm6 = new Vue({
+            el:'#demo6',
+            data:{
+                ok:true
             }
         });
     </script>
