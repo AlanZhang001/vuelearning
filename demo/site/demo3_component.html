@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0" >
+        <meta name="format-detection" content="telephone=no"/>
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-status-bar-style" content="black">
+        <title>VUE2 DEMOS COMPONENT</title>
+    </head>
+    <body>
+        <div id='componentDemo'></div>
+    </body>
+    <script type="text/javascript" src="../../node_modules/vue/dist/vue.min.js"></script>
+    <script type="text/javascript">
+        Vue.component('my-component', {
+            tempalte:''
+        });
+
+        var cp = new Vue({
+            el: '#componentDemo',
+            data: {
+
+            }
+        });
+    </script>
+</html>
