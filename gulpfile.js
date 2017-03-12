@@ -70,6 +70,21 @@ gulp.task('rev-static', function(){
         .pipe(gulp.dest('./todolist'));
 });
 
+gulp.task('npm-install', function(cb) {
+    exec('npm install', function(err, stdout, stderr) {
+        console.log('stdout : ' + stdout);
+        console.log('stderr : ' + stderr);
+        cb(err);
+    });
+});
+
+gulp.task('npm-prune', function(cb) {
+    exec('npm prune', function(err, stdout, stderr) {
+        console.log('stdout : ' + stdout);
+        console.log('stderr : ' + stderr);
+        cb(err);
+    });
+});
 
 //js开发环境
 gulp.task('webpackDev', function() {
@@ -86,6 +101,6 @@ gulp.task('watch', function() {
 });
 
 gulp.task('default', function() {
-    return runSequence('clean', 'webpackDev','rev-static', 'watch');
+    return runSequence('clean', 'npm-install','npm-prune','webpackDev','rev-static', 'watch');
 });
 gulp.task('dev', ['default']);
