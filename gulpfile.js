@@ -43,7 +43,7 @@ var devConfig = {
     },
     watch: false,
     plugins: [
-        new webpack.optimize.UglifyJsPlugin('*.js')
+        // new webpack.optimize.UglifyJsPlugin('*.js')
     ],
     devtool: 'source-map',
     resolve:{
@@ -97,10 +97,10 @@ gulp.task('webpackDev', function() {
 
 //监控文件变化
 gulp.task('watch', function() {
-    gulp.watch(['./todolist/scripts/source/**/*Main.js', './todolist/css/source/**/*.css'], ['webpackDev']);
+    gulp.watch(['./todolist/scripts/source/**/*.js', './todolist/css/source/**/*.css'], ['webpackDev']);
 });
 
 gulp.task('default', function() {
-    return runSequence('clean', 'npm-install','npm-prune','webpackDev','rev-static', 'watch');
+    return runSequence('clean', /*'npm-install','npm-prune',*/'webpackDev','rev-static', 'watch');
 });
 gulp.task('dev', ['default']);

@@ -10,13 +10,50 @@
         <meta name="keywords" content="todolist vue2" />
         <meta name="description" content="使用vue2.0 实现的todolist" />
         <meta name="copyright" content="富途证券国际(香港)有限公司"" />
+        <style type="text/css">
+            [v-cloak] { display: none; }
+        </style>
     </head>
     <body>
-        <div id='todoContainer'>
-            {{test}}
-        </div>
+        <section id='todoContainer' v-cloak>
+            <header><h2 class="heder-title">TodoList</h2></header>
+            <div class="todolist-input-wrapper">
+                <div style="float: left;">
+                    <input type="checkbox" class="toggle-todolist" id='selectAll' v-model='alldone'><label for="selectAll" v-bind:title="alldoneTitle">></label>
+                </div>
+                <div style="position: relative;overflow: hidden;">
+                    <input class="todolist-input" v-bind:placeholder='placeholder' v-model.trim='todo' v-on:keyup.enter='addNewTodo'/>
+                </div>
+            </div>
+            <div class="todolist-wrapper">
+                <ul class="todolist" v-bind:class="{ empty: remains == 0 }">
+                    <template v-for='(item,index) in filterList'>
+                        <li class="todoList-item">
+                            <input type="checkbox" class="todolist-item-status"  v-on:click='doneTodo(index)' v-model='item.isCompleted' />
+                            <p class="totdo-item-content">{{item.content}}</p>
+                            <a href="javascript:void(0)" class="todolist-item-operate todolist-item-delete" v-on:click='deleteTodo(index)'></a>
+                        </li>
+                    </template>
+                </ul>
+            </div>
+            <div class="todolist-summary-warpper">
+                <span class="todolist-summary-remains">{{remains}}条规划</span>
+                <ul class="todolist-summary-filter">
+                    <template v-for='(value,key) in STATUS'>
+                    <li class='todolist-summary-filter-item'>
+                        <input type="radio" v-bind:id="key" v-bind:value='value' v-model="filterStaus"/>
+                        <label v-bind:for="key">{{value.toUpperCase()}}</label>
+                    </li>
+                    </template>
+                    <a v-on:click='delteCompleted' class="todolist-summary-filter-item todolist-summary-deleltecomplete" href="javascript:void(0)">删除已完成</a>
+                </ul>
+            </div>
+            <footer>
+                <p>VUE. 国人的骄傲</p>
+            </footer>
+        </section>
     </body>
     <!-- rev-hash -->
-    <script type="text/javascript" src="../scripts/dist/indexMain.js?v=33c8ddcced55dafe75c7cc17b3b6d04b"></script>
+    <script type="text/javascript" src="../scripts/dist/indexMain.js?v=adf99e7fc5c13145d4766f3b45270e77"></script>
     <!-- end -->
 </html>

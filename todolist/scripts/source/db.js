@@ -11,16 +11,16 @@ var db = {
      * @type {[type]}
      */
     fetch(){
-        return JSON.parseJSON(localStorage.getItem(this.dbkey) || '[]');
+        return JSON.parse(localStorage.getItem(this.dbkey) || '[]');
     },
 
     /**
-     * [save 保存某条todo数据]
-     * @param  {[type]} todo [某条todolist的状态]
-     * @return {[type]}      [description]
+     * [save 保存一组todo Obect]
+     * @param  {[Obejct]} todo [todo数组]
+     * @return {[type]}        [description]
      */
-    save(todo){
-
+    save(todoList){
+        localStorage.setItem(this.dbkey,JSON.stringify(todoList));
     }
 };
 
