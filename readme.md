@@ -34,9 +34,7 @@ var myComponentInstance = new MyComponent()
 
 ### 我的学习路线
 1. 通读基础部分，实现其中提到的例子【除组件外已完成】
-2. 完成TODOLIST【完成】
-    - 构建环境:【完成】
-    - 开发：【完成】
+2. 完成TODOLIST【完成】[TodoList](https://alanzhang001.github.io/vuelearning/todolist/sites/index.html)
 3. 阅读阅读官方教程进阶篇的前半部分【未完成】
 4. **根据个人学习情况调整，实时阅读vue做的学习顺序建议**
 
