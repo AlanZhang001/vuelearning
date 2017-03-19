@@ -198,7 +198,15 @@
 	         * @type {Object}
 	         */
 	        alldone: {
-	            handler: function handler() {}
+	            handler: function handler(val, oldval) {
+	
+	                var status = val ? this.STATUS.COMPLETED : this.STATUS.ACTIVE;
+	                var isCompleted = val;
+	                this.todolist.forEach(function (item) {
+	                    item.status = status;
+	                    item.isCompleted = isCompleted;
+	                });
+	            }
 	        }
 	    }
 	});

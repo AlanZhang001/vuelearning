@@ -125,9 +125,15 @@ let todoList = new Vue({
          * [alldone 是否选择全部完成]
          * @type {Object}
          */
-        alldone:{
-            handler: function(){
+        alldone: {
+            handler: function(val,oldval) {
 
+                let status = val ? this.STATUS.COMPLETED : this.STATUS.ACTIVE;
+                let isCompleted = val;
+                this.todolist.forEach(item=>{
+                    item.status = status;
+                    item.isCompleted = isCompleted;
+                });
             }
         }
     }
