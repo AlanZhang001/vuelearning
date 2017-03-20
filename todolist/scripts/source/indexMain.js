@@ -58,8 +58,8 @@ let todoList = new Vue({
          * @return {[type]}       [description]
          */
         doneTodo: function(index){
-            this.todolist[index].status = this.STATUS.COMPLETED;
-            this.todolist[index].isCompleted = true;
+            // this.todolist[index].isCompleted = !this.todolist[index].isCompleted;
+            this.todolist[index].status = this.todolist[index].isCompleted ? this.STATUS.COMPLETED : this.STATUS.ACTIVE;
         },
 
         /**
@@ -126,11 +126,11 @@ let todoList = new Vue({
          * @type {Object}
          */
         alldone: {
-            handler: function(val,oldval) {
+            handler: function(val, oldval) {
 
                 let status = val ? this.STATUS.COMPLETED : this.STATUS.ACTIVE;
                 let isCompleted = val;
-                this.todolist.forEach(item=>{
+                this.todolist.forEach(item => {
                     item.status = status;
                     item.isCompleted = isCompleted;
                 });

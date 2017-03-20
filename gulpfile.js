@@ -43,7 +43,7 @@ var devConfig = {
     },
     watch: false,
     plugins: [
-        // new webpack.optimize.UglifyJsPlugin('*.js')
+        new webpack.optimize.UglifyJsPlugin('*.js')
     ],
     devtool: 'source-map',
     resolve:{
