@@ -29,7 +29,9 @@ let todoList = new Vue({
         alldone:false,
 
         // 初始筛选的状态
-        filterStaus: 'all'
+        filterStaus: 'all',
+
+        editedTodo: null
     },
     methods: {
         /**
@@ -79,6 +81,46 @@ let todoList = new Vue({
             this.todolist = this.todolist.filter(item => {
                 return item.status != this.STATUS.COMPLETED;
             });
+        },
+
+        /**
+         * [editTodo 编辑]
+         * @return {[type]} [正在编辑的todo]
+         */
+        editTodo(todo){
+            this.editedTodo = todo;
+            this.backup = todo.content;
+        },
+
+        /**
+         * [doneEdit 完成编辑]
+         * @param  {[type]} todo [description]
+         * @return {[type]}      [description]
+         */
+        doneEdit(todo,index){
+            console.log(todo)
+            if(!todo.content) {
+                this.deleteTodo(index);
+                return;
+            }
+
+            if(!this.editedTodo) {
+                return;
+            }
+            todo.content = todo.content.trim();
+            this.editedTodo = null;
+            this.backup = null;
+        },
+
+        /**
+         * [cancelEdit 取消编辑]
+         * @param  {[type]} todo [description]
+         * @return {[type]}      [description]
+         */
+        cancelEdit(todo){
+            this.editedTodo = null;
+            this.backup = null;
+            todo.content = this.backup;
         }
     },
     computed:{

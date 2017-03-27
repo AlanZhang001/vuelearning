@@ -28,9 +28,10 @@
             <div class="todolist-wrapper">
                 <ul class="todolist" v-bind:class="{ empty: remains == 0 }">
                     <template v-for='(item,index) in filterList'>
-                        <li class="todoList-item">
+                        <li class="todoList-item" v-bind:class='{editing: item == editedTodo }'>
                             <input type="checkbox" class="todolist-item-status"  v-on:click='doneTodo(index)' v-model='item.isCompleted' />
-                            <p class="totdo-item-content">{{item.content}}</p>
+                            <p class="totdo-item-content" @dblclick="editTodo(item)">{{item.content}}</p>
+                            <input type="text" name="content"  class="editInput" v-model='item.content' @blur="doneEdit(item,index)" @keyup.enter="doneEdit(item,index)" @keyup.esc="cancelEdit(item)" >
                             <a href="javascript:void(0)" class="todolist-item-operate todolist-item-delete" v-on:click='deleteTodo(index)'></a>
                         </li>
                     </template>
@@ -54,6 +55,6 @@
         </section>
     </body>
     <!-- rev-hash -->
-    <script type="text/javascript" src="../scripts/dist/indexMain.js?v=36e6f81e1c24f9f543e67524cb9269ce"></script>
+    <script type="text/javascript" src="../scripts/dist/indexMain.js?v=99adec07204d6226fb29c0671fc68a36"></script>
     <!-- end -->
 </html>

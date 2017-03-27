@@ -49,7 +49,7 @@ var devConfig = {
     resolve:{
         modulesDirectories: ['./node_modules/','./todolist/scripts/'],
         alias:{
-            'vue': path.resolve(__dirname, './node_modules/vue/dist/vue.min')
+            'vue': path.resolve(__dirname, './node_modules/vue/dist/vue')
         }
     }
 };
