@@ -250,6 +250,7 @@ footer{
  }
  .editing .editInput:focus{
     outline: none;
+    border:1px solid rgba(105, 181, 177, 0.59);
  }
  .editing .totdo-item-content{
     display: none;
