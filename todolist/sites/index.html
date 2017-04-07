@@ -17,6 +17,8 @@
     <body>
         <section id='todoContainer' v-cloak>
             <header><h2 class="heder-title">TodoList</h2></header>
+
+            <!--输入框-->
             <div class="todolist-input-wrapper">
                 <div style="float: left;">
                     <input type="checkbox" class="toggle-todolist" id='selectAll' v-model='alldone'><label for="selectAll" v-bind:title="alldoneTitle">></label>
@@ -25,18 +27,29 @@
                     <input class="todolist-input" v-bind:placeholder='placeholder' v-model.trim='todo' v-on:keyup.enter='addNewTodo'/>
                 </div>
             </div>
+            <!--输入框-->
+
+            <!--todolist列表-->
             <div class="todolist-wrapper">
                 <ul class="todolist" v-bind:class="{ empty: remains == 0 }">
                     <template v-for='(item,index) in filterList'>
                         <li class="todoList-item" v-bind:class='{editing: item == editedTodo }'>
                             <input type="checkbox" class="todolist-item-status"  v-on:click='doneTodo(index)' v-model='item.isCompleted' />
                             <p class="totdo-item-content" @dblclick="editTodo(item)">{{item.content}}</p>
-                            <input type="text" name="content"  class="editInput" v-model='item.content' @blur="doneEdit(item,index)" @keyup.enter="doneEdit(item,index)" @keyup.esc="cancelEdit(item)" >
+                            <input type="text" name="content"  class="editInput"
+                                v-focus="editedTodo == item"
+                                v-model='item.content'
+                                @blur="doneEdit(item,index)"
+                                @keyup.enter="doneEdit(item,index)"
+                                @keyup.esc="cancelEdit(item)" />
                             <a href="javascript:void(0)" class="todolist-item-operate todolist-item-delete" v-on:click='deleteTodo(index)'></a>
                         </li>
                     </template>
                 </ul>
             </div>
+            <!--todolist列表-->
+
+            <!--底部操作按钮-->
             <div class="todolist-summary-warpper">
                 <span class="todolist-summary-remains">{{remains}}条规划</span>
                 <ul class="todolist-summary-filter">
@@ -49,12 +62,14 @@
                     <a v-on:click='delteCompleted' class="todolist-summary-filter-item todolist-summary-deleltecomplete" href="javascript:void(0)">删除已完成</a>
                 </ul>
             </div>
+            <!--底部操作按钮-->
+
             <footer>
                 <p>VUE. 国人的骄傲</p>
             </footer>
         </section>
     </body>
     <!-- rev-hash -->
-    <script type="text/javascript" src="../scripts/dist/indexMain.js?v=99adec07204d6226fb29c0671fc68a36"></script>
+    <script type="text/javascript" src="../scripts/dist/indexMain.js?v=f34159124c3b9fe3797f2d2b30c9411b"></script>
     <!-- end -->
 </html>
