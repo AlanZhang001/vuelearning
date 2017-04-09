@@ -15,7 +15,8 @@ let todoVue = {
     // 窗口大小
     size: {
         width: 630,
-        height: 800
+        height: 800,
+        titleBarStyle: 'hidden-inset'
     },
 
     // 站点的入口地址
@@ -33,6 +34,9 @@ let todoVue = {
     createWindow(){
         // 创建窗口
         win = new BrowserWindow(this.size);
+
+        // 隐藏工具栏
+        win.setMenuBarVisibility(false);
 
         // 加载app 首页
         win.loadURL(url.format({
