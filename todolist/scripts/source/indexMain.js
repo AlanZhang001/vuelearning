@@ -118,9 +118,9 @@ let todoList = new Vue({
          * @return {[type]}      [description]
          */
         cancelEdit(todo) {
+            todo.content = this.backup;
             this.editedTodo = null;
             this.backup = null;
-            todo.content = this.backup;
         }
     },
     computed: {
