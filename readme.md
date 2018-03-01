@@ -30,6 +30,8 @@ var myComponentInstance = new MyComponent()
 ![img](asserts/array.png)
 ##### 8. model语法
 ![img](asserts/model.png)
+##### 9. 在属性是布尔类型的一些情况中，v-bind 的作用有点不同，只要值存在就会隐含为 true
+![img](asserts/bind.png)
 
 
 ### 我的学习路线
