@@ -32,7 +32,12 @@ var myComponentInstance = new MyComponent()
 ![img](asserts/model.png)
 ##### 9. 在属性是布尔类型的一些情况中，v-bind 的作用有点不同，只要值存在就会隐含为 true
 ![img](asserts/bind.png)
+##### 10 关于component
+- data 必须是一个函数
 
+### 其他常见问题
+- [解说vue开发过程中的“深坑”](https://zhuanlan.zhihu.com/p/39398459)
+    + v-for key的问题
 
 ### 我的学习路线
 1. 通读基础部分，实现其中提到的例子【除组件外已完成】
