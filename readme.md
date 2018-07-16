@@ -45,6 +45,12 @@ var myComponentInstance = new MyComponent()
 3. 阅读阅读官方教程进阶篇的前半部分【未完成】
 4. **根据个人学习情况调整，实时阅读vue做的学习顺序建议**
 
+### 常见配置内容
+- [路由懒加载](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html#%E6%8A%8A%E7%BB%84%E4%BB%B6%E6%8C%89%E7%BB%84%E5%88%86%E5%9D%97)
+- HMR和热加载
+    - [webpack-dev-server](http://www.cnblogs.com/penghuwan/p/6941616.html)
+    - [webpack-dev-server官方文档，错误少，翻译的总容易带偏](https://webpack.js.org/configuration/dev-server/#devserver)
+
 ### 学习资料
 - <http://cn.vuejs.org/>
 - 尤雨溪:Vue 2.0 的建议学习顺序:<https://zhuanlan.zhihu.com/p/23134551>
