@@ -1,2 +1,12 @@
 node_modules
+bower_components
+npm-debug.log
 .idea
+*.iml
+.dist
+package-lock.json
+scripts-build
+css-build
+.tmp
+coverage
+.out.txt

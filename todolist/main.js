@@ -1,6 +1,8 @@
 /**
  * electron 启动app
+ * 启动命令：npm run runelectron
  */
+
 
 const electron = require('electron');
 const app = electron.app;
@@ -31,7 +33,7 @@ let todoVue = {
     /**
      * 创建窗口对象
      */
-    createWindow(){
+    createWindow() {
         // 创建窗口
         win = new BrowserWindow(this.size);
 
@@ -56,7 +58,7 @@ let todoVue = {
      */
     bindEvent() {
         // electron 初始化完成时创建窗口
-        app.on('ready',()=>{
+        app.on('ready', () => {
             this.createWindow();
         });
 
@@ -79,7 +81,7 @@ let todoVue = {
 
     },
 
-    start(){
+    start() {
         this.bindEvent();
     }
 };

@@ -1,6 +1,6 @@
 ## VUE学习笔记
 
-### 当前进度：<https://cn.vuejs.org/v2/guide/components.html>
+[TodoList](https://alanzhang001.github.io/vuelearning/todolist/sites/index.html)
 
 ### 笔记
 ##### 1. Vue.js 支持所有兼容 ECMAScript 5 的浏览器，不支持IE8;
@@ -39,11 +39,6 @@ var myComponentInstance = new MyComponent()
 - [解说vue开发过程中的“深坑”](https://zhuanlan.zhihu.com/p/39398459)
     + v-for key的问题
 
-### 我的学习路线
-1. 通读基础部分，实现其中提到的例子【除组件外已完成】
-2. 完成TODOLIST【完成】[TodoList](https://alanzhang001.github.io/vuelearning/todolist/sites/index.html)
-3. 阅读阅读官方教程进阶篇的前半部分【未完成】
-4. **根据个人学习情况调整，实时阅读vue做的学习顺序建议**
 
 ### 常见配置内容
 - [路由懒加载](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html#%E6%8A%8A%E7%BB%84%E4%BB%B6%E6%8C%89%E7%BB%84%E5%88%86%E5%9D%97)
