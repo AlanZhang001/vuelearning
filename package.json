@@ -5,7 +5,7 @@
   "main": "todolist/main.js",
   "scripts": {
     "runelectron":"npm install electron@1.6.2 && cd ./todolist && ./node_modules/.bin/electron .",
-    "start": "http-server ./ -a localhost -p 8000 -c-1 -o",
+    "start": "cross-env NODE_ENV=development node server/watcher.js",
     "devserver": "webpack-dev-server --hot --inline --config webpack.config.js"
   },
   "keywords": [
@@ -47,7 +47,7 @@
     "waterline": "^0.13.0-5"
   },
   "devDependencies": {
-    "http-server": "^0.9.0",
+
     "@babel/core": "^7.0.0-beta.35",
     "@babel/preset-env": "^7.0.0-beta.35",
     "babel-loader": "^8.0.0-beta.0",

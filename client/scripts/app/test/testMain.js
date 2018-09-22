@@ -12,7 +12,7 @@ Vue.use(VueRouter);
 
 var router = new VueRouter({
     mode: 'history',
-    base: '/',
+    base: '/views/test.html',
     routes: [{
         path: '/',
         redirect: '/view'

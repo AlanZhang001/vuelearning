@@ -7,7 +7,9 @@
 <script>
 export default {
     data: function(){
-        words:'hello world'
+        return {
+            words:'hello world'
+        };
     }
 };
 </script>
