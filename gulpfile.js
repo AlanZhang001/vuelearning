@@ -37,7 +37,7 @@ gulp.task('webpackProd', gulpShell.task([
 
 // 清理现有dll文件
 gulp.task('cleanDll', function () {
-    return gulp.src(['./client/scripts/dll'], { read: false })
+    return gulp.src(['./client/dll'], { read: false })
         .pipe(clean());
 });
 

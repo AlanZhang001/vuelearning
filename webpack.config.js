@@ -92,7 +92,7 @@ module.exports = env => {
                     manifest: (function(){
                         var json = {};
                         try{
-                            json = require('./client/scripts/dll/vendor-manifest.json');
+                            json = require('./client/dll/vendor-manifest.json');
                         }catch(e){
                             console.log('[webpack.config.js] manifest not exist. please run "gulp webpackDll" to generate.');
                         }
