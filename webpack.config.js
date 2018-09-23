@@ -65,7 +65,7 @@ module.exports = env => {
             open: true,
             hot: true,
             progress: true,
-            openPage:'/',
+            openPage: '',
             overlay: true,
             inline: true,
             compress: true,
@@ -79,52 +79,41 @@ module.exports = env => {
             }
         },
         devtool: isProdEnv ? 'hidden-source-map' : 'source-map',
-        plugins: ((function(){
-            var _plugins = [
-                new webpack.DefinePlugin({
-                    'process.env.NODE_ENV': isProdEnv ? '"production"' : '"development"'
-                }),
-                new webpack.DllReferencePlugin({
-                    context: __dirname,
-                    /**
-                    * 在这里引入 manifest 文件
-                    */
-                    manifest: (function(){
-                        var json = {};
-                        try{
-                            json = require('./client/dll/vendor-manifest.json');
-                        }catch(e){
-                            console.log('[webpack.config.js] manifest not exist. please run "gulp webpackDll" to generate.');
-                        }
-                        return json;
+        plugins: [
+            new webpack.DefinePlugin({
+                'process.env.NODE_ENV': isProdEnv ? '"production"' : '"development"'
+            }),
+            new webpack.DllReferencePlugin({
+                context: __dirname,
+                /**
+                 * 在这里引入 manifest 文件
+                 */
+                manifest: (function() {
+                    var json = {};
+                    try {
+                        json = require('./client/dll/vendor-manifest.json');
+                    } catch (e) {
+                        console.log('[webpack.config.js] manifest not exist. please run "gulp webpackDll" to generate.');
+                    }
+                    return json;
 
-                    })()
-                }),
-                new webpack.optimize.CommonsChunkPlugin({
-                    name: 'app/commons',
-                    filename: 'app/commons.js',
-                    minChunks: Object.keys(entryMap).length
-                })
-            ];
-
-            if (isProdEnv) {
-                _plugins.push(
-                    new UglifyJsPlugin({
-                        parallel: true,
-                        cache: path.resolve(__dirname, './.tmp/jscache2'),
-                        uglifyOptions: {
-                            compress: {
-                                drop_console: true
-                            }
-                        }
-                    })
-                );
-            } else {
-                _plugins.push(new webpack.HotModuleReplacementPlugin());
-            }
-
-            return _plugins;
-        })()),
+                })()
+            }),
+            new webpack.optimize.CommonsChunkPlugin({
+                name: 'app/commons',
+                filename: 'app/commons.js',
+                minChunks: Object.keys(entryMap).length
+            }),
+            isProdEnv ? new UglifyJsPlugin({
+                parallel: true,
+                cache: path.resolve(__dirname, './.tmp/jscache2'),
+                uglifyOptions: {
+                    compress: {
+                        drop_console: true
+                    }
+                }
+            }) : new webpack.HotModuleReplacementPlugin()
+        ],
         output: {
             path: path.resolve(__dirname, './client/scripts-build'),
             filename: '[name].js',
@@ -144,7 +133,7 @@ function getEntrys() {
     var entry = {};
     var files = glob.sync('./client/scripts/**/*Main.js');
 
-    files.forEach(function (item, index) {
+    files.forEach(function(item, index) {
         entry[item.substring(rootPath.length, item.lastIndexOf('.js'))] = item;
     });
 
