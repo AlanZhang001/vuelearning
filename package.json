@@ -5,8 +5,9 @@
   "main": "todolist/main.js",
   "scripts": {
     "runelectron":"npm install electron@1.6.2 && cd ./todolist && ./node_modules/.bin/electron .",
-    "start": "cross-env NODE_ENV=development node server/watcher.js",
-    "devserver": "webpack-dev-server --hot --inline --config webpack.config.js"
+    "develop": "cross-env NODE_ENV=development node server/watcher.js",
+    "devserver": "webpack-dev-server --hot --inline --config webpack.config.js",
+    "start": "concurrently \"npm run develop\" \"gulp d\""
   },
   "keywords": [
     "vue2"

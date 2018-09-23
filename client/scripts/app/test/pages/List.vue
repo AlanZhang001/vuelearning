@@ -8,7 +8,7 @@
 export default {
     data: function(){
         return {
-            words:'hello view'
+            words:'hello list'
         };
     }
 };
