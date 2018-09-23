@@ -5,11 +5,13 @@
 
 
 import Vue from 'vue';
+import Vuex from 'vuex'
 import VueRouter from 'vue-router';
 
 const View = () => import ('./pages/View.vue');
 const List = () => import ('./pages/List.vue');
 
+Vue.use(Vuex);
 Vue.use(VueRouter);
 
 var router = new VueRouter({
@@ -29,6 +31,7 @@ var router = new VueRouter({
 
 new Vue({
     el: '#app',
+
     router: router,
     data: function() {
         return {};

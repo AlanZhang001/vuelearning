@@ -4,7 +4,7 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        vendor: ['vue/dist/vue', 'vue-router']
+        vendor: ['vue/dist/vue', 'vue-router','vuex/dist/vuex.common']
     },
     output: {
         path: path.join(__dirname,'./client/dll'),
