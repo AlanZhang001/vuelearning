@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./../partial/head.html',{title:'TEST'}) -%>
+    </head>
+    <body>
+        <div id="app" v-cloak>
+            <ul>
+                <li><router-link to="/list">list</router-link></li>
+                <li><router-link to="/view">view</router-link></li>
+            </ul>
+            <router-view ref="viewLog"></router-view>
+        </div>
+        <%- include ../partial/commonScripts.html -%>
+        <!-- rev-hash -->
+        <script type="text/javascript" src="/scripts-build/app/test/testMain.js?v=e0a6edfbe14049286c5713d57e1a1f10"></script>
+        <!-- end -->
+    </body>
+<html>

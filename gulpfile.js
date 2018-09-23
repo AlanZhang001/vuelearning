@@ -17,15 +17,9 @@ gulp.task('clean', function () {
         .pipe(clean());
 });
 
-gulp.task('webpackDev-hot-reload', function(cb) {
-    var child = exec('npm run devserver', function(err, stdout, stderr) {
-        cb(err);
-    });
-
-    child.stdout.on('data', function(data) {
-        console.log(data);
-    });
-});
+gulp.task('webpackDev-hot-reload', gulpShell.task([
+    'webpack-dev-server --hot --inline --config webpack.config.js'
+]));
 
 gulp.task('webpackDev', gulpShell.task([
     'webpack --progress --watch --config=webpack.config.js'

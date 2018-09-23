@@ -3,7 +3,6 @@
  *
  */
 
-//
 
 import Vue from 'vue';
 import VueRouter from 'vue-router';
@@ -15,7 +14,7 @@ Vue.use(VueRouter);
 
 var router = new VueRouter({
     mode: 'history',
-    base: '/views/test.html',
+    base: '/test',
     routes: [{
         path: '/',
         redirect: '/list'
