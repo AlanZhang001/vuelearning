@@ -46,16 +46,10 @@ const moduleA = {
     }
 };
 
-const moduleB = {
-    state: {},
-    mutations: {},
-    actions: {}
-};
-
 const store = new Vuex.Store({
+    strict: true,
     modules: {
-        a: moduleA,
-        b: moduleB
+        a: moduleA
     }
 });
 
@@ -63,7 +57,6 @@ const store = new Vuex.Store({
 var router = new VueRouter({
     mode: 'history',
     base: '/test',
-    store: store,
     routes: [{
         path: '/',
         redirect: '/list'
@@ -78,7 +71,7 @@ var router = new VueRouter({
 
 new Vue({
     el: '#app',
-
+    store: store,
     router: router,
     data: function() {
         return {};

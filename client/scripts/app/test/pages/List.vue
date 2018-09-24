@@ -2,6 +2,8 @@
 <template>
 <div>
     {{words}}
+    <p>{{$store.state.a.count}}</p>
+    <<button @click=""></button>
 </div>
 </template>
 <script>
