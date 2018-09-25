@@ -3,7 +3,7 @@
 <div>
     {{words}}
     <p>{{$store.state.a.count}}</p>
-    <<button @click=""></button>
+    <button @click="$store.commit('increment')">加1</button>
 </div>
 </template>
 <script>

@@ -48,6 +48,9 @@ const moduleA = {
 
 const store = new Vuex.Store({
     strict: true,
+    state:{
+        count:10
+    },
     modules: {
         a: moduleA
     }
