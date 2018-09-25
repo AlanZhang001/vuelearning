@@ -3,7 +3,8 @@
 <div>
     {{words}}
     <p>{{$store.state.a.count}}</p>
-    <button @click="$store.commit('increment')">加1</button>
+    <p>{{$store.getters['a/sumWithRootCount']}}</p>
+    <button @click="$store.commit('a/increment')">加1</button>
 </div>
 </template>
 <script>
