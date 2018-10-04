@@ -22,7 +22,7 @@ var router = new VueRouter({
     }, {
         path: '/view',
         component: View
-    }, , {
+    }, {
         path: '/list',
         component: List
     }]
