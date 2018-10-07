@@ -13,7 +13,9 @@
                 <div>
                     <ul>
                         <li v-for="(item,index) in list.data" :key="index">
-                            <p>{{item}}</p>
+                            <p>
+								<a :href="item.href" _target="_blank">{{item.name}}</a>
+							</p>
 						</li>
                     </ul>
                 </div>

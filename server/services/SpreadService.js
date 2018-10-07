@@ -42,7 +42,13 @@ SpreadService.fetchList = function(doc) {
     var arr = Array.from($('.list .dt.p1'));
     var res = [];
     arr.forEach(item=>{
-        res.push($(item).text().replace(/[\r\n\t]/gi,''));
+		var $item  = $(item);
+		var href = $item.find('a').attr('href');
+		var name = $item.text().replace(/[\r\n\t]/gi,'');
+        res.push({
+			name:name,
+			href:href
+		});
     });
     return res;
 };
