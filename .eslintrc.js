@@ -11,7 +11,7 @@ module.exports = {
             experimentalObjectRestSpread: true,
         },
     },
-    extends: 'futu',
+    extends: ['futu','plugin:vue/essential'],
     rules:{
         "semi": ["error", "always"],
         "no-console": 0

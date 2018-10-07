@@ -61,8 +61,6 @@
     "eslint-config-airbnb": "^14.1.0",
     "eslint-config-futu": "^1.0.0",
     "eslint-plugin-import": "^2.6.1",
-    "eslint-plugin-jsx-a11y": "^4.0.0",
-    "eslint-plugin-react": "^6.10.3",
     "eslint-plugin-vue": "^4.0.1",
     "exports-loader": "^0.6.2",
     "extend": "^3.0.0",
