@@ -14,7 +14,9 @@
   "author": "alanzhang",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.18.0",
     "chokidar": "^1.6.1",
+    "crawler": "^1.2.0",
     "ejs": "^2.6.1",
     "iconv-lite": "^0.4.19",
     "koa": "^2.3.0",

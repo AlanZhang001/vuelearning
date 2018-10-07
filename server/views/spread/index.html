@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <%- include('./../partial/head.html',{title:'spread'}) -%>
+    </head>
+    <body>
+        <div id="app" v-cloak>
+            <h3>查找</h3>
+            <p>请输入电影名称：<input v-model.trim="name" placeholder="输入电影名称" /></p>
+            <button @click="search">SEARCH</button>
+            <div>
+                <h3> 下载列表</h3>
+                <div>{{list}}</div>
+            </div>
+        </div>
+        <%- include ../partial/commonScripts.html -%>
+        <!-- rev-hash -->
+        <script type="text/javascript" src="/scripts-build/app/spread/spreadMain.js?v=e0a6edfbe14049286c5713d57e1a1f10"></script>
+        <!-- end -->
+    </body>
+<html>

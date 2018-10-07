@@ -9,7 +9,8 @@ let router = new Router();
 
 router.get('/',SiteController.test);
 
-router.get('/test/*',SiteController.test);
+router.get('/test*',SiteController.test);
+router.get('/spread*',SiteController.spread);
 
 
 module.exports = router;

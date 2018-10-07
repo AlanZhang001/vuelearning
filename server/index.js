@@ -16,7 +16,9 @@ const views = require('koa-views');
 let config = require('./config');
 let router = require('./routes');
 
-console.log(config.staticDir.root);
+let baseCtx = require('./middleware/BaseContext');
+
+baseCtx(app);
 
 app.use(logger())
 .use(bodyParser({
