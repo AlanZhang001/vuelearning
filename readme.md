@@ -42,9 +42,7 @@ var myComponentInstance = new MyComponent()
 
 ### 常见配置内容
 - [路由懒加载](https://router.vuejs.org/zh/guide/advanced/lazy-loading.html#%E6%8A%8A%E7%BB%84%E4%BB%B6%E6%8C%89%E7%BB%84%E5%88%86%E5%9D%97)
-- HMR和热加载
-    - [webpack-dev-server](http://www.cnblogs.com/penghuwan/p/6941616.html)
-    - [webpack-dev-server官方文档，错误少，翻译的总容易带偏](https://webpack.js.org/configuration/dev-server/#devserver)
+- [vue 设置eslint](https://vue-loader-v14.vuejs.org/zh-cn/workflow/linting.html)
 
 ### 学习资料
 - <http://cn.vuejs.org/>
