@@ -13,7 +13,7 @@ new Vue({
     data: function() {
         return {
             name:'',
-            list: null
+            list: []
         };
     },
     methods:{

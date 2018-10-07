@@ -25,7 +25,7 @@ SpreadService.fetchDoc = async function(name) {
                 done();
             }
         });
-
+		name = encodeURIComponent(name);
         crawler.queue(`${domain}/${name}/${pages}`);
     });
 
@@ -37,5 +37,12 @@ SpreadService.fetchDoc = async function(name) {
  * @return {Array}     [数据列表]
  */
 SpreadService.fetchList = function(doc) {
-    return [];
+    var $ = doc.$;
+
+    var arr = Array.from($('.list .dt.p1'));
+    var res = [];
+    arr.forEach(item=>{
+        res.push($(item).text().replace(/[\r\n\t]/gi,''));
+    });
+    return res;
 };

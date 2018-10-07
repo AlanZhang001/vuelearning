@@ -10,7 +10,13 @@
             <button @click="search">SEARCH</button>
             <div>
                 <h3> 下载列表</h3>
-                <div>{{list}}</div>
+                <div>
+                    <ul>
+                        <li v-for="(item,index) in list.data" :key="index">
+                            <p>{{item}}</p>
+						</li>
+                    </ul>
+                </div>
             </div>
         </div>
         <%- include ../partial/commonScripts.html -%>
