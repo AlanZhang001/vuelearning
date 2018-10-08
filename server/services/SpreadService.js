@@ -15,6 +15,7 @@ SpreadService.fetchDoc = async function(name) {
     return new Promise(function(resolve, reject) {
         let crawler = new Crawler({
             maxConnections: 10,
+            rateLimit: 1000,
             // This will be called for each crawled page
             callback: function(error, res, done) {
                 if (error) {
