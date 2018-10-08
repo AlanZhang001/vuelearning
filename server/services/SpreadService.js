@@ -25,7 +25,7 @@ SpreadService.fetchDoc = async function(name) {
                 done();
             }
         });
-		name = encodeURIComponent(name);
+        name = encodeURIComponent(name);
         crawler.queue(`${domain}/${name}/${pages}`);
     });
 
@@ -42,13 +42,18 @@ SpreadService.fetchList = function(doc) {
     var arr = Array.from($('.list .dt.p1'));
     var res = [];
     arr.forEach(item=>{
-		var $item  = $(item);
-		var href = $item.find('a').attr('href');
-		var name = $item.text().replace(/[\r\n\t]/gi,'');
+        var $item = $(item);
+        var $attr = $item.next('.attr.p1').find('span').toArray();
+
+        var href = $item.find('a').attr('href');
+        var _name = $item.text().replace(/[\r\n\t]/gi,'');
         res.push({
-			name:name,
-			href:href
-		});
+            name:_name,
+            href:href,
+            count: $($attr[2]).text().replace(/[\r\n\t]/gi,''),
+            size: $($attr[3]).text().replace(/[\r\n\t]/gi,''),
+            date:$($attr[4]).text().replace(/[\r\n\t]/gi,'')
+        });
     });
     return res;
 };

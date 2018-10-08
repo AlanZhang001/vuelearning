@@ -11,13 +11,14 @@
             <div>
                 <h3> 下载列表</h3>
                 <div>
-                    <ul>
+                    <ul v-if="list.data.length>0">
                         <li v-for="(item,index) in list.data" :key="index">
                             <p>
-								<a :href="item.href" _target="_blank">{{item.name}}</a>
+								<a :href="item.href" target="_blank">$nbsp;{{item.name}}</a>({{item.date}}，{{item.count}}，{{item.size}})
 							</p>
 						</li>
                     </ul>
+                    <div v-if="list.data.length===0"> {{list.message}} </div>
                 </div>
             </div>
         </div>

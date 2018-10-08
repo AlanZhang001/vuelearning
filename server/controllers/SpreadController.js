@@ -12,7 +12,7 @@ SpreadController.getDoc = async function(ctx) {
     let doc = await SpreadService.fetchDoc(_name);
     let result = await SpreadService.fetchList(doc);
 
-    if(Array.isArray(result) && result.length) {
+    if(Array.isArray(result) && result.length > 0) {
         return ctx.JsonResponse.success(result);
     }
 

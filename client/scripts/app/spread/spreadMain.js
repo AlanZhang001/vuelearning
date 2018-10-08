@@ -13,7 +13,11 @@ new Vue({
     data: function() {
         return {
             name:'',
-            list: []
+            list: {
+                data: [],
+                message:''
+            },
+            message:''
         };
     },
     methods:{
@@ -32,7 +36,7 @@ new Vue({
             this.list = res;
         },
         error: function(e){
-            console.log(e);
+            this.list.message = e.message;
         }
     }
 });
