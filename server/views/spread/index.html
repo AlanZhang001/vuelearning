@@ -2,20 +2,46 @@
 <html lang="en">
     <head>
         <%- include('./../partial/head.html',{title:'spread'}) -%>
+        <style type="text/css" media="screen">
+            #app{
+                max-width: 1100px;
+                margin: 0 auto;
+            }
+            ul,li{
+                list-style: none;
+                padding: 0;
+                margin: 0;
+            }
+            li.item {
+                border-bottom: 1px solid darkgray;
+            }
+            li.item .dl{
+                word-break: break-all;
+            }
+        </style>
     </head>
     <body>
         <div id="app" v-cloak>
             <h3>查找</h3>
-            <p>请输入电影名称：<input v-model.trim="name" placeholder="输入电影名称" /></p>
-            <button @click="search">SEARCH</button>
+            <p>
+                <span>请输入电影名称：</span>
+                <input v-model.trim="name" placeholder="输入电影名称"  @keyup.enter="search" />
+                <button @click="search">SEARCH</button>
+            </p>
             <div>
                 <h3> 下载列表</h3>
                 <div>
-                    <ul v-if="list.data.length>0">
-                        <li v-for="(item,index) in list.data" :key="index">
-                            <p>
-								<a :href="item.href" target="_blank">$nbsp;{{item.name}}</a>({{item.date}}，{{item.count}}，{{item.size}})
-							</p>
+                    <ul class="list" v-if="list.data.length>0">
+                        <li class="item" v-for="(item,index) in list.data" :key="index">
+                            <div>
+                                <p>
+                                    <span class="name">{{item.name}}</span>
+                                    <span class="date">{{item.date}}</span>
+                                    <span class="count">{{item.count}}</span>
+                                    <span class="size">{{item.size}}</span>
+                                </p>
+                                <p><span class="dl">{{item.dl}}</span></p>
+							</div>
 						</li>
                     </ul>
                     <div v-if="list.data.length===0"> {{list.message}} </div>
