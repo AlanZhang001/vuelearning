@@ -7,6 +7,9 @@
                 max-width: 1100px;
                 margin: 0 auto;
             }
+            h3{
+                padding: 0;margin: 0;
+            }
             ul,li{
                 list-style: none;
                 padding: 0;
@@ -17,6 +20,13 @@
             }
             li.item .dl{
                 word-break: break-all;
+            }
+            li.item .name{
+                color: #ce5252;
+                font-size: 14px;
+            }
+            li.item span{
+                padding-left: 20px;
             }
         </style>
     </head>
@@ -35,9 +45,9 @@
                         <li class="item" v-for="(item,index) in list.data" :key="index">
                             <div>
                                 <p>
-                                    <span class="name">{{item.name}}</span>
-                                    <span class="date">{{item.date}}</span>
-                                    <span class="count">{{item.count}}</span>
+                                    <span class="name">{{item.name}}</span>/
+                                    <span class="date">{{item.date}}</span>/
+                                    <span class="count">{{item.count}}</span>/
                                     <span class="size">{{item.size}}</span>
                                 </p>
                                 <p><span class="dl">{{item.dl}}</span></p>
