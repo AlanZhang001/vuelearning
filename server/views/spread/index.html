@@ -2,61 +2,55 @@
 <html lang="en">
     <head>
         <%- include('./../partial/head.html',{title:'spread'}) -%>
-        <style type="text/css" media="screen">
-            #app{
-                max-width: 1100px;
-                margin: 0 auto;
-            }
-            h3{
-                padding: 0;margin: 0;
-            }
-            ul,li{
-                list-style: none;
-                padding: 0;
-                margin: 0;
-            }
-            li.item {
-                border-bottom: 1px solid darkgray;
-            }
-            li.item .dl{
-                word-break: break-all;
-            }
-            li.item .name{
-                color: #ce5252;
-                font-size: 14px;
-            }
-            li.item span{
-                padding-left: 20px;
-            }
-        </style>
+        <link rel="stylesheet" href="https://unpkg.com/element-ui/lib/theme-chalk/index.css">
+        <link rel="stylesheet" href="/css-build/spread/index.css">
     </head>
     <body>
-        <div id="app" v-cloak>
-            <h3>查找</h3>
-            <p>
-                <span>请输入电影名称：</span>
-                <input v-model.trim="name" placeholder="输入电影名称"  @keyup.enter="search" />
-                <button @click="search">SEARCH</button>
-            </p>
-            <div>
-                <h3> 下载列表</h3>
-                <div>
-                    <ul class="list" v-if="list.data.length>0">
-                        <li class="item" v-for="(item,index) in list.data" :key="index">
-                            <div>
-                                <p>
-                                    <span class="name">{{item.name}}</span>/
-                                    <span class="date">{{item.date}}</span>/
-                                    <span class="count">{{item.count}}</span>/
-                                    <span class="size">{{item.size}}</span>
-                                </p>
-                                <p><span class="dl">{{item.dl}}</span></p>
-							</div>
-						</li>
-                    </ul>
-                    <div v-if="list.data.length===0"> {{list.message}} </div>
-                </div>
-            </div>
+        <div id="app" v-cloak> 
+            <el-container>
+                <el-header>想你所想</el-header>
+                <el-main>
+                    <div>
+                        <div class="demo-input-suffix">
+                            <el-input
+                                placeholder="输入电影名称"
+                                prefix-icon="el-icon-search"
+                                @keyup.enter.native="search"
+                                v-model.trim="name">
+                            </el-input>
+                        </div>
+                        <el-button type="primary" @click="search">SEARCH</el-button>
+                    </div>
+                    
+                    <div class="wrap">
+                        <div v-if="list.data.length>0">
+                            <el-table :data="list.data" style="width: 100%" stripe >
+                                <el-table-column type="expand">
+                                    <template slot-scope="props">
+                                        <el-form label-position="left" inline class="demo-table-expand">
+                                        <el-form-item label="下载链接">
+                                            <a :href="props.row.dl" class="dl">{{ props.row.dl }}</a>
+                                        </el-form-item>
+                                        </el-form>
+                                    </template>
+                                </el-table-column>
+                            
+                                <el-table-column prop="name" label="名称" class-name="movie-name"> </el-table-column>
+                                <el-table-column prop="date" label="收录日期" width="200"> </el-table-column>
+                                <el-table-column prop="count" label="文件数量" width="150"> </el-table-column>
+                                <el-table-column prop="size" label="文件大小" width="150"> </el-table-column>
+                            </el-table>
+                            <div class="tool">
+                                <el-button type="primary" icon="el-icon-download">一键保存至百度云</el-button>
+                            </div>
+                        </div>
+                        
+                        <div v-if="list.data.length===0"> {{list.message}} </div>
+                    </div>
+
+                </el-main>
+                <el-footer>2018/10/10 Version 1.0.0</el-footer>
+            </el-container> 
         </div>
         <%- include ../partial/commonScripts.html -%>
         <!-- rev-hash -->

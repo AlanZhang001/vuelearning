@@ -10,3 +10,4 @@ css-build
 .tmp
 coverage
 .out.txt
+.DS_Store

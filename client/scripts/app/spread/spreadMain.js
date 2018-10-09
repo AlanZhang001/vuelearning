@@ -3,9 +3,11 @@
  *
  */
 
-
+import ElementUI from 'element-ui';
 import Vue from 'vue';
 import service from './service';
+
+Vue.use(ElementUI);
 
 new Vue({
     el: '#app',

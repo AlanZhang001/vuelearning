@@ -1,0 +1,63 @@
+@charset "utf-8";
+html,body{
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+#app{
+    margin: 0 auto;
+    background: white;
+    min-height: 100%;
+    position: relative;
+}
+.demo-input-suffix{
+    display: inline-block;
+    width: 300px;
+}
+p{
+    margin:0;
+    padding:0;
+}
+.dl{
+    word-break: break-all;
+    line-height: 16px;
+}
+.el-header{
+    position: absolute;
+    width:100%;
+    line-height: 60px;
+    text-align: left;
+    text-indent:80px;
+    font-size: 28px;
+    background: #409EFF;
+    color: white;
+}
+.el-main{
+    position: absolute;
+    top: 60px;
+    bottom: 60px;
+    left: 80px;
+    right: 80px;
+}
+.el-footer{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    line-height: 60px;
+    text-align: center;
+    background: #409EFF;
+    color: white;
+}
+.wrap{
+    /* height: calc(100vh - 60px - 60px - 200px); */
+    overflow: auto;
+}
+.el-form-item__content{
+    line-height: 20px;
+}
+.tool{
+    margin-top: 40px;
+}
+.movie-name{
+    color: blue;
+}
