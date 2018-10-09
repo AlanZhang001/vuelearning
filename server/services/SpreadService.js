@@ -4,8 +4,13 @@ let domain = 'http://cnbtspread.xyz';
 // 使用地址：https://github.com/bda-research/node-crawler
 // https://juejin.im/post/5943526fac502e006c71c242
 let Crawler = require('crawler');
-let pages = '1-0-0';
+let pages = '1-1-0';
 
+let ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
+let referer = 'https://www.google.com.hk/';
+let header = {
+    Cookie:'__cfduid=dac7ee27bcbbcb19df1b9529e0f693c491539004318; cf_clearance=667ef45811f29e48321c77702b3bfe2fc3bd0b75-1539062783-1800-150'
+};
 /**
  * 构造函数
  * @param {String} mname [电影名称]
@@ -21,8 +26,9 @@ function SpreadService(mname){
  */
 SpreadService.prototype.getRes = async function(){
     let docStr = await this.fetchDoc();
-    let itemList = await this.fetchDoc(docStr);
+    let itemList = await this.fetchList(docStr);
     itemList = await this.fetchDownlaodPages(itemList);
+    console.log(itemList);
     return itemList;
 };
 
@@ -36,6 +42,9 @@ SpreadService.prototype.fetchDoc = async function() {
         let crawler = new Crawler({
             maxConnections: 10,
             rateLimit: 1000,
+            userAgent:ua,
+            referer:referer,
+            headers:header,
             // This will be called for each crawled page
             callback: function(error, res, done) {
                 if (error) {
@@ -59,11 +68,12 @@ SpreadService.prototype.fetchDoc = async function() {
 SpreadService.prototype.fetchList = function(doc) {
     var $ = doc.$;
 
-    var arr = Array.from($('.list .dt.p1'));
+    var arr = Array.from($('.list .dt'));
+    console.log(arr.length);
     var res = [];
     arr.forEach(item=>{
         var $item = $(item);
-        var $attr = $item.next('.attr.p1').find('span').toArray();
+        var $attr = $item.next('.attr').find('span').toArray();
 
         var href = $item.find('a').attr('href');
         var _name = $item.text().replace(/[\r\n\t]/gi,'');
@@ -85,14 +95,21 @@ SpreadService.prototype.fetchList = function(doc) {
  * @return {[type]}     [description]
  */
 SpreadService.prototype.fetchDownlaodPages = async function(arr){
+
+    if(!Array.isArray(arr) || arr.length === 0) {
+        return [];
+    }
+
     var promises = [];
     var that = this;
     arr.forEach(item=>{
-        promises.push(new Promise(function(resolve, reject) {
+        var p = new Promise(function(resolve, reject) {
             let crawler = new Crawler({
                 maxConnections: 10,
                 rateLimit: 1000,
-                // This will be called for each crawled page
+                userAgent:ua,
+                referer:referer,
+                headers:header,
                 callback: function(error, res, done) {
                     if (error) {
                         reject(error);
@@ -104,9 +121,9 @@ SpreadService.prototype.fetchDownlaodPages = async function(arr){
                     done();
                 }
             });
-
-            crawler.queue(item.href);
-        }));
+            crawler.queue(/^http/gi.test(item.href) ? item.href : ('http:' + item.href));
+        });
+        promises.push(p);
     });
     return Promise.all(promises);
 };
