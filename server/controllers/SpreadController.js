@@ -9,13 +9,13 @@ SpreadController.getDoc = async function(ctx) {
         throw new Error('名称不能为空');
     }
 
-    let doc = await SpreadService.fetchDoc(_name);
-    let result = await SpreadService.fetchList(doc);
+    let spreadService = new SpreadService(_name);
+    let result = await spreadService.getRes();
 
-    if(Array.isArray(result) && result.length > 0) {
+    if (Array.isArray(result) && result.length > 0) {
         return ctx.JsonResponse.success(result);
     }
 
-    return ctx.JsonResponse.error(-1,'未找到资源');
+    return ctx.JsonResponse.error(-1, '未找到资源');
 
 };
