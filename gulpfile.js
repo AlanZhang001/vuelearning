@@ -97,7 +97,7 @@ gulp.task('watchCss', function() {
 
 // 开发环境构建任务
 gulp.task('dev', function() {
-    return runSequence('npm-prune', 'npm-install', 'clean', 'postcss','watchCss', 'webpackDev');
+    return runSequence('npm-prune', 'clean', 'postcss','watchCss', 'webpackDev');
 });
 
 // 前端开发环境构建任务
