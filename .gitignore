@@ -11,3 +11,5 @@ css-build
 coverage
 .out.txt
 .DS_Store
+logs/*
+v8-compile-cache-0
