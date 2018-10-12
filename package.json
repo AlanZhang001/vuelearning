@@ -63,7 +63,6 @@
     "csswring": "^5.1.0",
     "del": "^2.2.2",
     "eslint": "^3.19.0",
-    "eslint-config-airbnb": "^14.1.0",
     "eslint-config-futu": "^1.0.0",
     "eslint-plugin-import": "^2.6.1",
     "eslint-plugin-vue": "^4.0.1",
