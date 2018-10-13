@@ -26,11 +26,14 @@ let config = {
         // 站点的爬虫设置
         spread: {
             domain: 'http://cnbtspread.xyz',
-            ua: 'Mozilla/5.0 (Linux;u;Android 4.2.2;zh-cn;) AppleWebKit/534.46 (KHTML,likeGecko) Version/5.1 Mobile Safari/10600.6.3 (compatible; Baiduspider/2.0;+http://www.baidu.com/search/spider.html)',
-            referer: 'https://www.google.com.hk/',
+            // ua: 'Mozilla/5.0 (Linux;u;Android 4.2.2;zh-cn;) AppleWebKit/534.46 (KHTML,likeGecko) Version/5.1 Mobile Safari/10600.6.3 (compatible; Baiduspider/2.0;+http://www.baidu.com/search/spider.html)',
+            // ua: 'Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)',
+            ua: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',
+            referer: 'http://yandex.com/',
             header: {
-                Cookie: '__cfduid=dac7ee27bcbbcb19df1b9529e0f693c491539004318; cf_clearance=c9b940479c35834f182443b2cc120efdee04049c-1539089655-1800-150'
-            }
+                Cookie: '__cfduid=dc543cb273696b6d678222fd1673afa801539436756; cf_clearance=e38fa7aa7b87050fd48e0999ae621310be764262-1539436783-1800-250'
+            },
+            rateLimit: 2100
         }
     },
     mysql: {

@@ -9,7 +9,7 @@ const app = new Koa();
 
 const staticServe = require('koa-static');
 const logger = require('koa-logger');
-
+const json = require('koa-json')
 const bodyParser = require('koa-body');
 const views = require('koa-views');
 
@@ -21,6 +21,7 @@ let baseCtx = require('./middleware/BaseContext');
 baseCtx(app);
 
 app.use(logger())
+.use(json())
 .use(bodyParser({
     multipart: true
 }))

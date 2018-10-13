@@ -4,7 +4,7 @@
 let Crawler = require('crawler');
 let spreadConfig = require('./../config').spiderConfig.spread;
 let Spread = require('./../models/Spread');
-let { domain, ua, referer, header } = spreadConfig;
+let { domain, ua, referer, header,rateLimit } = spreadConfig;
 
 let pages = '1-1-0';
 
@@ -32,6 +32,11 @@ SpreadService.prototype.getRes = async function () {
     // 通过爬虫去获取数据
     let docStr = await this.fetchDoc();
     let itemList = await this.fetchList(docStr);
+
+    if (!itemList || itemList.length === 0) {
+        console.log(docStr);
+    }
+
     itemList = await this.fetchDownlaodPages(itemList);
 
     // 将获取的数据同步至数据库
@@ -54,7 +59,7 @@ SpreadService.prototype.findFromDBByName = async function (name) {
                 $like: '%' + name + '%'
             }
         },
-        attributes:['name']
+        attributes: ['name']
     });
     return result || [];
 };
@@ -67,8 +72,7 @@ SpreadService.prototype.fetchDoc = async function () {
     let _name = this.name;
     return new Promise(function (resolve, reject) {
         let crawler = new Crawler({
-            maxConnections: 10,
-            rateLimit: 1000,
+            rateLimit: rateLimit,
             userAgent: ua,
             referer: referer,
             headers: header,
@@ -132,8 +136,7 @@ SpreadService.prototype.fetchDownlaodPages = async function (arr) {
     arr.forEach(item => {
         var p = new Promise(function (resolve, reject) {
             let crawler = new Crawler({
-                maxConnections: 10,
-                rateLimit: 1000,
+                rateLimit: rateLimit,
                 userAgent: ua,
                 referer: referer,
                 headers: header,
