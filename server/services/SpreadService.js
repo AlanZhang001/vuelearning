@@ -1,16 +1,11 @@
 
-let domain = 'http://cnbtspread.xyz';
-
 // 使用地址：https://github.com/bda-research/node-crawler
 // https://juejin.im/post/5943526fac502e006c71c242
 let Crawler = require('crawler');
 let pages = '1-1-0';
 
-let ua = 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36';
-let referer = 'https://www.google.com.hk/';
-let header = {
-    Cookie:'__cfduid=dac7ee27bcbbcb19df1b9529e0f693c491539004318; cf_clearance=c9b940479c35834f182443b2cc120efdee04049c-1539089655-1800-150'
-};
+let spreadConfig = require('./../config').spiderConfig.spread;
+let {domain,ua,referer,header} = spreadConfig;
 
 /**
  * 构造函数
