@@ -1,10 +1,10 @@
-var webpack = require('webpack');
-var ManifestPlugin = require('webpack-manifest-plugin');
-var path = require('path');
+const webpack = require('webpack');
+const ManifestPlugin = require('webpack-manifest-plugin');
+const path = require('path');
 
 module.exports = {
     entry: {
-        vendor: ['vue/dist/vue', 'vue-router','vuex/dist/vuex.common']
+        vendor: ['vue/dist/vue', 'vue-router','vuex/dist/vuex.common','element-ui']
     },
     output: {
         path: path.join(__dirname,'./client/dll'),

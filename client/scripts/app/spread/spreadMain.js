@@ -6,38 +6,54 @@
 import ElementUI from 'element-ui';
 import Vue from 'vue';
 import service from './service';
-
 Vue.use(ElementUI);
 
 new Vue({
     el: '#app',
 
-    data: function() {
+    data: function () {
         return {
-            name:'',
+            name: '',
+            loading:false,
             list: {
                 data: [],
-                message:''
+                message: ''
             },
-            message:''
+            timer: null
         };
     },
-    methods:{
-        search: function(){
-            if(!this.name){
+    methods: {
+
+        search: function () {
+            if (!this.name || this.loading) {
                 return;
             }
-
-            service.getDoc(this.name).then((res)=>{
+    
+            this.list.data = [];
+            this.showLoading();
+            service.getDoc(this.name).then((res) => {
+             
                 this.renderList(res.data);
-            }).catch((e)=>{
+                this.hideLoading();
+           
+            }).catch((e) => {
                 this.error(e);
+                this.hideLoading();
             });
         },
-        renderList: function(res){
+        showLoading:function(){
+            this.loading = true;
+        },  
+        hideLoading: function(){
+            this.timer && clearTimeout(this.timer);
+            this.timer = setTimeout(()=>{
+                this.loading = false;
+            },600);
+        },  
+        renderList: function (res) {
             this.list = res;
         },
-        error: function(e){
+        error: function (e) {
             this.list.message = e.message;
         }
     }

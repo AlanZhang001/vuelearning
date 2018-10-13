@@ -34,10 +34,11 @@ p{
 }
 .el-main{
     position: absolute;
-    top: 60px;
-    bottom: 60px;
+    top: 80px;
+    bottom: 80px;
     left: 80px;
     right: 80px;
+    padding: 0;
 }
 .el-footer{
     position: absolute;
@@ -51,6 +52,11 @@ p{
 .wrap{
     /* height: calc(100vh - 60px - 60px - 200px); */
     overflow: auto;
+    top: 70px;
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
 }
 .el-form-item__content{
     line-height: 20px;

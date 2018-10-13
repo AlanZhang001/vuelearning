@@ -98,5 +98,9 @@
     "webpack-cli": "^3.0.8",
     "webpack-dev-server": "^2.11.2",
     "webpack-manifest-plugin": "^2.0.0-rc.2"
+  },
+  "nodemonConfig": {
+    "ignore": ["client/*"],
+    "delay": "1000"
   }
 }

@@ -1,9 +1,9 @@
 /*global module*/
-var webpack = require('webpack');
-var path = require('path');
-var glob = require('glob');
-var UglifyJsPlugin = require('uglifyjs-webpack-plugin');
-
+const webpack = require('webpack');
+const path = require('path');
+const glob = require('glob');
+const UglifyJsPlugin = require('uglifyjs-webpack-plugin');
+const serverConfig = require('./server/config').server;
 var entryMap = getEntrys();
 
 module.exports = env => {
@@ -65,14 +65,14 @@ module.exports = env => {
             open: true,
             hot: true,
             progress: true,
-            openPage: '',
+            openPage: '/spread',
             overlay: true,
             inline: true,
             compress: true,
             clientLogLevel: 'info',
             proxy: {
                 '/': {
-                    target: 'http://localhost:4000',
+                    target: 'http://localhost:' + serverConfig.port,
                     changeOrigin: true,
                     secure: false
                 }
