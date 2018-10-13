@@ -11,12 +11,13 @@ Vue.use(ElementUI);
 new Vue({
     el: '#app',
 
-    data: function () {
+    data: function() {
         return {
             name: '',
-            loading:false,
-            list: {
-                data: [],
+            loading: false,
+            data: {
+                list: [],
+                isFromCache: true,
                 message: ''
             },
             timer: null
@@ -24,37 +25,41 @@ new Vue({
     },
     methods: {
 
-        search: function () {
+        search: function() {
             if (!this.name || this.loading) {
                 return;
             }
-    
-            this.list.data = [];
+
+            this.data.list = [];
             this.showLoading();
             service.getDoc(this.name).then((res) => {
-             
+
                 this.renderList(res.data);
                 this.hideLoading();
-           
+
             }).catch((e) => {
                 this.error(e);
                 this.hideLoading();
             });
         },
-        showLoading:function(){
+        showLoading: function() {
             this.loading = true;
-        },  
-        hideLoading: function(){
-            this.timer && clearTimeout(this.timer);
-            this.timer = setTimeout(()=>{
-                this.loading = false;
-            },600);
-        },  
-        renderList: function (res) {
-            this.list = res;
         },
-        error: function (e) {
-            this.list.message = e.message;
+        hideLoading: function() {
+            this.timer && clearTimeout(this.timer);
+            this.timer = setTimeout(() => {
+                this.loading = false;
+            }, 600);
+        },
+        renderList: function(res) {
+            this.data.list = res.data.list;
+            this.data.isFromCache = res.data.isFromCache;
+            this.data.message = res.message;
+        },
+        error: function(e) {
+
+            this.data.message = e.message;
+            console.log(this.data);
         }
     }
 });

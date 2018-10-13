@@ -22,11 +22,14 @@ function SpreadService(mname) {
  * @return {Array} [description]
  */
 SpreadService.prototype.getRes = async function () {
-    let cacheList = this.findFromDBByName(this.name);
+    let cacheList = [];//this.findFromDBByName(this.name);
 
     // 读取数据库中的数据
     if (Array.isArray(cacheList) && cacheList.length > 0) {
-        return cacheList;
+        return {
+            list:cacheList,
+            isFromCache: true
+        };
     }
 
     // 通过爬虫去获取数据
@@ -42,7 +45,10 @@ SpreadService.prototype.getRes = async function () {
     // 将获取的数据同步至数据库
     await this.syncDB(itemList);
 
-    return itemList;
+    return {
+        list:itemList,
+        isFromCache: false
+    };
 };
 
 SpreadService.prototype.syncDB = async function (list) {
