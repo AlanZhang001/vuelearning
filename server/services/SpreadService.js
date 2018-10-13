@@ -22,7 +22,7 @@ function SpreadService(mname) {
  * @return {Array} [description]
  */
 SpreadService.prototype.getRes = async function () {
-    let cacheList = [];//this.findFromDBByName(this.name);
+    let cacheList = this.findFromDBByName(this.name);
 
     // 读取数据库中的数据
     if (Array.isArray(cacheList) && cacheList.length > 0) {
