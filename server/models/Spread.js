@@ -61,6 +61,7 @@ module.exports = spread.define('movie_search', {
         field: 'record_date'
     }
 }, {
-    underscored: true,
+    // underscored: true,
+    timestamps:false,
     freezeTableName: true
 });

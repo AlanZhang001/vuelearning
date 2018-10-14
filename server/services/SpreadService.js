@@ -2,9 +2,8 @@
 // 使用地址：https://github.com/bda-research/node-crawler
 // https://juejin.im/post/5943526fac502e006c71c242
 let Crawler = require('crawler');
-let spreadConfig = require('./../config').spiderConfig.spread;
+let spreadConfig = require('./../config').spiderConfig;
 let Spread = require('./../models/Spread');
-let { domain, ua, referer, header,rateLimit } = spreadConfig;
 
 let pages = '1-1-0';
 
@@ -14,6 +13,9 @@ let pages = '1-1-0';
  * @returns {undefined}
  */
 function SpreadService(mname) {
+    this.site = 'spread';
+    this.spreadConfig = spreadConfig[this.site];
+    this.nameOriginal = mname;
     this.name = encodeURIComponent(mname);
 }
 
@@ -22,39 +24,45 @@ function SpreadService(mname) {
  * @return {Array} [description]
  */
 SpreadService.prototype.getRes = async function () {
-    let cacheList = this.findFromDBByName(this.name);
-
-    // 读取数据库中的数据
-    if (Array.isArray(cacheList) && cacheList.length > 0) {
-        return {
-            list:cacheList,
-            isFromCache: true
-        };
-    }
 
     // 通过爬虫去获取数据
     let docStr = await this.fetchDoc();
     let itemList = await this.fetchList(docStr);
 
-    if (!itemList || itemList.length === 0) {
-        console.log(docStr);
-    }
-
     itemList = await this.fetchDownlaodPages(itemList);
 
-    if(!itemList || itemList.length === 0) {
-        itemList = require('../test/data.js');
+    if (!itemList || itemList.length === 0) {
+        // itemList = require('../test/data.js');
     }
 
-    // 将获取的数据同步至数据库
-    await this.syncDB(itemList);
+    if (itemList.length > 0) {
+        // 将获取的数据同步至数据库
+        await this.syncDB(itemList);
+        return {
+            list: itemList,
+            sourceSite: this.spreadConfig.domain,
+            isFromCache: false
+        };
+    }
 
-    return {
-        list:itemList,
-        isFromCache: false
-    };
+    let cacheList = await this.findFromDBByName(this.nameOriginal);
+
+    // 读取数据库中的数据
+    if (Array.isArray(cacheList) && cacheList.length > 0) {
+        return {
+            list: cacheList,
+            sourceSite: '本地数据',
+            isFromCache: true
+        };
+    }
+
 };
 
+/**
+ * 将得到的列表在数据库中同步
+ * @param {Array} list [数据列表]
+ * @returns {Boolean} 结果
+ */
 SpreadService.prototype.syncDB = async function (list) {
     if (!Array.isArray(list)) {
         return true;
@@ -64,22 +72,31 @@ SpreadService.prototype.syncDB = async function (list) {
     for (var i = 0, length = list.length; i < length; i++) {
 
         var item = list[i];
-        Spread.upsert(item,{
-            validate:true,
-            fields:['link','dl','size','count','record_date'],
-            hooks:true
+        if (!item.dl) {
+            continue;
+        }
+        await Spread.upsert(item, {
+            validate: true,
+            hooks: true
         });
     }
+    return true;
 };
 
-SpreadService.prototype.findFromDBByName = async function(name, isLike = true) {
+/**
+ * 根据名称从数据库查询数据
+ * @param {String} name [影片名称]
+ * @param {Boolean} isLike [是否模糊查找]
+ * @return {Array} 结果列表
+ */
+SpreadService.prototype.findFromDBByName = async function (name, isLike = true) {
     let result = Spread.findAll({
         where: {
             name: isLike ? {
                 $like: '%' + name + '%'
             } : name
         },
-        attributes: ['name']
+        // attributes: ['name']
     });
     return result || [];
 };
@@ -90,24 +107,19 @@ SpreadService.prototype.findFromDBByName = async function(name, isLike = true) {
  */
 SpreadService.prototype.fetchDoc = async function () {
     let _name = this.name;
-    return new Promise(function (resolve, reject) {
-        let crawler = new Crawler({
-            rateLimit: rateLimit,
-            userAgent: ua,
-            referer: referer,
-            headers: header,
-            // This will be called for each crawled page
-            callback: function (error, res, done) {
-                if (error) {
-                    reject(error);
-                } else {
-                    resolve(res);
+    return new Promise((resolve, reject) => {
+        let crawler = new Crawler(
+            Object.assign({
+                callback: function (error, res, done) {
+                    if (error) {
+                        reject(error);
+                    } else {
+                        resolve(res);
+                    }
+                    done();
                 }
-                done();
-            }
-        });
-
-        crawler.queue(`${domain}/${_name}/${pages}`);
+            }, this.spreadConfig));
+        crawler.queue(`${this.spreadConfig.domain}/${_name}/${pages}`);
     });
 };
 
@@ -134,7 +146,7 @@ SpreadService.prototype.fetchList = function (doc) {
             link: href,
             count: $($attr[2]).text().replace(/[\r\n\t]/gi, '').replace('个文件', ''),
             size: $($attr[3]).text().replace(/[\r\n\t]/gi, '').replace('共', ''),
-            record_date: $($attr[4]).text().replace(/[\r\n\t]/gi, '').replace('收录', '')
+            record_date: new Date($($attr[4]).text().replace(/[\r\n\t]/gi, '').replace('收录', ''))
         });
     });
     return res;
@@ -153,24 +165,20 @@ SpreadService.prototype.fetchDownlaodPages = async function (arr) {
 
     var promises = [];
     var that = this;
+
     arr.forEach(item => {
-        var p = new Promise(function (resolve, reject) {
-            let crawler = new Crawler({
-                rateLimit: rateLimit,
-                userAgent: ua,
-                referer: referer,
-                headers: header,
+        var p = new Promise((resolve, reject) => {
+            let crawler = new Crawler(Object.assign({
                 callback: function (error, res, done) {
                     if (error) {
                         reject(error);
                     } else {
-                        var link = that.fetchDownlaodLinks(res);
-                        item.dl = link;
+                        item.dl = that.fetchDownlaodLinks(res);
                         resolve(item);
                     }
                     done();
                 }
-            });
+            }, this.spreadConfig));
             crawler.queue(/^http/gi.test(item.link) ? item.link : ('http:' + item.link));
         });
         promises.push(p);

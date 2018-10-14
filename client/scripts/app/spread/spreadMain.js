@@ -24,6 +24,7 @@ new Vue({
             loading: false,
             data: {
                 list: [],
+                sourceSite:'',
                 isFromCache: true,
                 message: ''
             },
@@ -41,32 +42,31 @@ new Vue({
             this.showLoading();
             service.getDoc(this.name).then((res) => {
 
-                this.renderList(res.data);
-                this.hideLoading();
+                this.renderList(res);
+                this.hideLoading(res.data.list.length > 0 ? 0 : undefined);
 
             }).catch((e) => {
                 this.error(e);
-                this.hideLoading();
+                this.hideLoading(0);
             });
         },
         showLoading: function() {
             this.loading = true;
         },
-        hideLoading: function() {
+        hideLoading: function(timerCount=600) {
             this.timer && clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 this.loading = false;
-            }, 600);
+            },timerCount);
         },
         renderList: function(res) {
             this.data.list = res.data.list;
+            this.data.sourceSite = res.data.sourceSite;
             this.data.isFromCache = res.data.isFromCache;
             this.data.message = res.message;
         },
         error: function(e) {
-
             this.data.message = e.message;
-            console.log(this.data);
         }
     }
 });

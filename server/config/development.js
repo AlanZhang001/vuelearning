@@ -31,7 +31,7 @@ let config = {
             ua: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',
             referer: 'http://yandex.com/',
             header: {
-                Cookie: '__cfduid=dc543cb273696b6d678222fd1673afa801539436756; cf_clearance=e38fa7aa7b87050fd48e0999ae621310be764262-1539436783-1800-250'
+                Cookie: '__cfduid=dfbda475b5fc05d43e42873aa445339d81539510952; cf_clearance=79128b706dde27559bd6d6eaba5d0693e4fb93dc-1539511139-1800-250'
             },
             rateLimit: 2100
         }
