@@ -134,7 +134,7 @@ SpreadService.prototype.fetchList = function (doc) {
             link: href,
             count: $($attr[2]).text().replace(/[\r\n\t]/gi, '').replace('个文件', ''),
             size: $($attr[3]).text().replace(/[\r\n\t]/gi, '').replace('共', ''),
-            date: $($attr[4]).text().replace(/[\r\n\t]/gi, '').replace('收录', '')
+            record_date: $($attr[4]).text().replace(/[\r\n\t]/gi, '').replace('收录', '')
         });
     });
     return res;

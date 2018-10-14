@@ -28,7 +28,6 @@
                         class="wrap"
                         v-loading="loading"
                     >
-
                         <div v-if="data.list.length>0">
                             <el-table :data="data.list" style="width: 100%" stripe >
 
@@ -42,8 +41,12 @@
                                     </template>
                                 </el-table-column>
 
-                                <el-table-column prop="name" label="名称" class-name="movie-name"> </el-table-column>
-                                <el-table-column prop="date" label="收录日期" width="200"> </el-table-column>
+                                <el-table-column label="名称" class-name="movie-name">
+                                        <template slot-scope="scope"><a :href="scope.row.link" target="_blank">{{scope.row.name}}</a></template> 
+                                </el-table-column>
+                                <el-table-column label="收录日期" width="200"> 
+                                    <template slot-scope="scope">{{scope.row.record_date | dateformater}}</template> 
+                                </el-table-column>
                                 <el-table-column prop="count" label="文件数量" width="150"> </el-table-column>
                                 <el-table-column prop="size" label="文件大小" width="150"> </el-table-column>
                             </el-table>

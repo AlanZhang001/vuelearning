@@ -6,6 +6,13 @@
 import ElementUI from 'element-ui';
 import Vue from 'vue';
 import service from './service';
+import * as filters from './../filters';
+
+Vue.filter('dateformater',filters.formatDate);
+
+
+
+// 尽量靠后
 Vue.use(ElementUI);
 
 new Vue({
