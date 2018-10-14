@@ -27,12 +27,17 @@
 
                     <div
                         class="wrap"
-                        v-loading="loading"
-                    >
+                        v-loading="loading">
                         <div v-if="data.list.length>0">
                             
-                            <el-table :data="data.list" class="table-wrap" stripe >
+                            <el-table :data="data.list" class="table-wrap" 
+                                @selection-change="handleSelectionChange"
+                                stripe>
+                                <el-table-column
+                                    type="selection"
 
+                                    width="55">
+                                 </el-table-column>
                                 <el-table-column type="expand">
                                     <template slot-scope="props">
                                         <el-form label-position="left" inline class="demo-table-expand">
@@ -54,7 +59,7 @@
                             </el-table>
                             <p class="sourceSite">数据来源：{{data.sourceSite}}</p>
                             <div class="tool">
-                                <el-button type="primary" icon="el-icon-download">一键保存至百度云</el-button>
+                                <el-button type="primary" icon="el-icon-download" @click="saveToBaiduYun" :disabled="canDownLoad===false">一键保存至百度云</el-button>
                             </div>
                         </div>
 

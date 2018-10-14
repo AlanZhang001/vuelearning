@@ -10,8 +10,6 @@ import * as filters from './../filters';
 
 Vue.filter('dateformater',filters.formatDate);
 
-
-
 // 尽量靠后
 Vue.use(ElementUI);
 
@@ -28,7 +26,10 @@ new Vue({
                 isFromCache: true,
                 message: ''
             },
-            timer: null
+            timer: null,
+            multipleSelection:[],
+            dlList:[],
+            canDownLoad: false
         };
     },
     methods: {
@@ -67,6 +68,23 @@ new Vue({
         },
         error: function(e) {
             this.data.message = e.message;
+        },
+        handleSelectionChange(arr) {
+            this.multipleSelection = arr;
+            this.multipleSelection.forEach(item=>{
+                this.dlList.push(item.dl);
+            });
+        },
+        saveToBaiduYun: function(){
+            this.canDownLoad && console.log(this.dlList);
+        }
+    },
+    watch:{
+        multipleSelection: {
+            deep:true,
+            handler:function(){
+                this.canDownLoad = Boolean(this.multipleSelection.length > 0);
+            }
         }
     }
 });
