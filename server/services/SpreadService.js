@@ -48,14 +48,12 @@ SpreadService.prototype.getRes = async function () {
     let cacheList = await this.findFromDBByName(this.nameOriginal);
 
     // 读取数据库中的数据
-    if (Array.isArray(cacheList) && cacheList.length > 0) {
-        return {
-            list: cacheList,
-            sourceSite: '本地数据',
-            isFromCache: true
-        };
-    }
 
+    return {
+        list: cacheList,
+        sourceSite: '本地数据',
+        isFromCache: true
+    };
 };
 
 /**
