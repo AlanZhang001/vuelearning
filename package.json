@@ -7,7 +7,7 @@
     "runelectron": "npm install electron@1.6.2 && cd ./todolist && ./node_modules/.bin/electron .",
     "develop": "cross-env NODE_ENV=development node server/watcher.js",
     "debug": "cross-env NODE_ENV=development nodemon --inspect server/index.js",
-    "start": "concurrently \"npm run develop\" \"gulp d\"",
+    "start": "concurrently \"npm run debug\" \"gulp d\"",
     "prod": "pm2 start processes.json"
   },
   "keywords": [

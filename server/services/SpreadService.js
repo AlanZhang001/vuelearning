@@ -42,6 +42,10 @@ SpreadService.prototype.getRes = async function () {
 
     itemList = await this.fetchDownlaodPages(itemList);
 
+    if(!itemList || itemList.length === 0) {
+        itemList = require('../test/data.js');
+    }
+
     // 将获取的数据同步至数据库
     await this.syncDB(itemList);
 
@@ -55,15 +59,25 @@ SpreadService.prototype.syncDB = async function (list) {
     if (!Array.isArray(list)) {
         return true;
     }
+
+    // 在本地数据库中查找，如果没有记录，则插入，如果有，则更新
+    for (var i = 0, length = list.length; i < length; i++) {
+
+        var item = list[i];
+        Spread.upsert(item,{
+            validate:true,
+            fields:['link','dl','size','count','record_date'],
+            hooks:true
+        });
+    }
 };
 
-
-SpreadService.prototype.findFromDBByName = async function (name) {
+SpreadService.prototype.findFromDBByName = async function(name, isLike = true) {
     let result = Spread.findAll({
         where: {
-            name: {
+            name: isLike ? {
                 $like: '%' + name + '%'
-            }
+            } : name
         },
         attributes: ['name']
     });
@@ -117,7 +131,7 @@ SpreadService.prototype.fetchList = function (doc) {
         res.push({
             dl: '',
             name: _name,
-            href: href,
+            link: href,
             count: $($attr[2]).text().replace(/[\r\n\t]/gi, '').replace('个文件', ''),
             size: $($attr[3]).text().replace(/[\r\n\t]/gi, '').replace('共', ''),
             date: $($attr[4]).text().replace(/[\r\n\t]/gi, '').replace('收录', '')
@@ -157,7 +171,7 @@ SpreadService.prototype.fetchDownlaodPages = async function (arr) {
                     done();
                 }
             });
-            crawler.queue(/^http/gi.test(item.href) ? item.href : ('http:' + item.href));
+            crawler.queue(/^http/gi.test(item.link) ? item.link : ('http:' + item.link));
         });
         promises.push(p);
     });

@@ -28,19 +28,19 @@ module.exports = spread.define('movie_search', {
         type: Sequelize.STRING,
         field: 'dl'
     },
-    created: {
+    createdAt: {
         comment: '创建时间',
         allowNull: false,
         type: Sequelize.DATE,
-        default: new Date(),
-        field: 'createatd'
+        defaultValue: Sequelize.NOW,
+        field: 'createdAt'
     },
-    updated: {
+    updatedAt: {
         comment: '更新时间',
         allowNull: false,
-        default: new Date(),
+        defaultValue: Sequelize.NOW,
         type: Sequelize.DATE,
-        field: 'updatedat'
+        field: 'updatedAt'
     },
     size: {
         comment: '大小',
