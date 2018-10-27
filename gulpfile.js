@@ -116,16 +116,5 @@ gulp.task('pub', ['prod']);
 
 // CI构建任务
 gulp.task('ci', function() {
-    return runSequence('npm-prune', 'npm-install', 'clean', 'postcss', 'webpackProd', 'rev-hash', 'artifacts');
-});
-
-// 收集构建结构，供发布使用
-gulp.task('artifacts', function (cb) {
-    exec('bash sem-prod.sh',
-        function(err, stdout, stderr) {
-            cb(err);
-        }
-    );
-    //直接解压到frontend 目录即可
-    //unzip -o ./.artifacts/${commitId}.zip -d .
+    return runSequence('npm-prune', 'npm-install', 'clean', 'postcss', 'webpackProd', 'rev-hash');
 });
