@@ -52,6 +52,16 @@ let config = {
                 idle: 10000
             }
         }
+    },
+    i18n:{
+        directory: './server/locales',
+        //  `zh-CN` defualtLocale, must match the locales to the filenames
+        locales: ['zh-cn','zh-hk', 'en-us'],
+        modes: [
+            //  optional detect querystring - `/?locale=en-US`
+            'query'
+        ],
+        // query:true
     }
 };
 
