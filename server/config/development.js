@@ -34,7 +34,9 @@ let config = {
             headers: {
                 Cookie: '__cfduid=d9ab8475147a1048ba0fe4384c4e273461539098359; cf_clearance=63728cd4e4a00bb4fe492f4564a7a0b7b5a98fce-1539525258-1800-250'
             },
-            rateLimit: 2100
+            rateLimit: 2100,
+            retries:2,
+            retryTimeout:3000
         }
     },
     mysql: {
@@ -54,14 +56,23 @@ let config = {
         }
     },
     i18n:{
-        directory:path.join(__dirname, './../locales'),//'./server/locales',
+        directory:path.join(__dirname, './../locales'),
         //  `zh-CN` defualtLocale, must match the locales to the filenames
         locales: ['zh-cn','zh-hk', 'en-us'],
         modes: [
             //  optional detect querystring - `/?locale=en-US`
             'query'
-        ],
-        // query:true
+        ]
+    },
+    session:{
+        key: 'koa:sess',
+        maxAge: 86400000,
+        autoCommit: true, /** (boolean) automatically commit headers (default true) */
+        overwrite: true, /** (boolean) can overwrite or not (default true) */
+        httpOnly: true, /** (boolean) httpOnly or not (default true) */
+        signed: true, /** (boolean) signed or not (default true) */
+        rolling: false, /** (boolean) Force a session identifier cookie to be set on every response. The expiration is reset to the original maxAge, resetting the expiration countdown. (default is false) */
+        renew: false, /** (boolean) renew session when session is nearly expired, so we can always keep user logged in. (default is false)*/
     }
 };
 

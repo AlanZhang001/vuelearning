@@ -31,11 +31,7 @@ SpreadService.prototype.getRes = async function () {
 
     itemList = await this.fetchDownlaodPages(itemList);
 
-    if (!itemList || itemList.length === 0) {
-        // itemList = require('../test/data.js');
-    }
-
-    if (itemList.length > 0) {
+    if (Array.isArray(itemList) && itemList.length > 0) {
         // 将获取的数据同步至数据库
         await this.syncDB(itemList);
         return {
@@ -109,12 +105,15 @@ SpreadService.prototype.fetchDoc = async function () {
         let crawler = new Crawler(
             Object.assign({
                 callback: function (error, res, done) {
+                    done();
                     if (error) {
-                        reject(error);
+                        console.log('------------fetchDoc-------------')
+                        console.log(error);
+                        resolve(null);
                     } else {
                         resolve(res);
                     }
-                    done();
+
                 }
             }, this.spreadConfig));
         crawler.queue(`${this.spreadConfig.domain}/${_name}/${pages}`);
@@ -127,10 +126,15 @@ SpreadService.prototype.fetchDoc = async function () {
  * @return {Array}     [数据列表]
  */
 SpreadService.prototype.fetchList = function (doc) {
+
+    if(!doc) {
+        return [];
+    }
+
     var $ = doc.$;
 
     var arr = Array.from($('.list .dt'));
-    console.log(arr.length);
+
     var res = [];
     arr.forEach(item => {
         var $item = $(item);
@@ -169,7 +173,8 @@ SpreadService.prototype.fetchDownlaodPages = async function (arr) {
             let crawler = new Crawler(Object.assign({
                 callback: function (error, res, done) {
                     if (error) {
-                        reject(error);
+                        console.log(error);
+                        resolve(null);
                     } else {
                         item.dl = that.fetchDownlaodLinks(res);
                         resolve(item);

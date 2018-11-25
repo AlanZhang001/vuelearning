@@ -84,6 +84,7 @@
     "koa-json": "^1.1.3",
     "koa-locale": "^1.3.0",
     "koa-render": "^0.2.1",
+    "koa-session": "^5.10.0",
     "mocha": "^2.5.3",
     "mysql": "^2.16.0",
     "nodemon": "^1.18.4",

@@ -15,6 +15,7 @@ const views = require('koa-views');
 
 const locale = require('koa-locale');
 const i18n = require('koa-i18n');
+const session = require('koa-session');
 
 let config = require('./config');
 let router = require('./routes');
@@ -25,6 +26,9 @@ locale(app);
 
 baseCtx(app);
 
+// koa-session的坑必须在使用前为app.keys赋值
+app.keys = ['newest secret key', 'older secret key'];
+
 app.use(logger());
 app.use(json());
 app.use(bodyParser({
@@ -33,17 +37,28 @@ app.use(bodyParser({
 app.use(views(config.template.path, config.template.options));
 app.use(staticServe(config.staticDir.root,config.staticDir.options));
 app.use(i18n(app,config.i18n));
+app.use(session(config.session,app));
 
 app.use(async function(ctx, next) {
+
+    let n = ctx.session.views || 0;
+    ctx.session.views = ++n;
+
     var date = new Date();
     ctx.state = Object.assign(ctx.state, {
         year: date.getFullYear(),
         month: ('00' + (date.getMonth() + 1)).substr(-2),
         date: ('00' + (date.getDate() + 1)).substr(-2),
-        version:'1.0.0'
+        version:'1.0.0',
+        pv: ctx.session.views
     });
+
+
+
     await next();
 });
+
+
 
 // 装载路由
 router(app);
