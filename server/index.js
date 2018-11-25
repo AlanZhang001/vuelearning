@@ -13,8 +13,8 @@ const json = require('koa-json')
 const bodyParser = require('koa-body');
 const views = require('koa-views');
 
-const locale = require('koa-locale') //  detect the locale
-const i18n = require('koa-i18n')
+const locale = require('koa-locale');
+const i18n = require('koa-i18n');
 
 let config = require('./config');
 let router = require('./routes');

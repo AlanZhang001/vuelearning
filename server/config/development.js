@@ -54,7 +54,7 @@ let config = {
         }
     },
     i18n:{
-        directory: './server/locales',
+        directory:path.join(__dirname, './../locales'),//'./server/locales',
         //  `zh-CN` defualtLocale, must match the locales to the filenames
         locales: ['zh-cn','zh-hk', 'en-us'],
         modes: [

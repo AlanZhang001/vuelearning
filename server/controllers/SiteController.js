@@ -5,6 +5,6 @@ SiteController.test = async function(ctx){
 };
 SiteController.spread = async function(ctx){
     await ctx.render('spread/index',{
-        header: ctx.i18n.__('想你所想')
+        source: ctx.i18n.__('数据来源')
     });
 };
