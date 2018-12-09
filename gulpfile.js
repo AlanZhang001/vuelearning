@@ -11,6 +11,7 @@ const atImport = require('postcss-import');
 const csswring = require('csswring');
 const plumber = require('gulp-plumber');
 const autoprefixer = require('autoprefixer');
+const precss = require('precss');
 
 // 清理现有文件
 gulp.task('clean', function () {
@@ -82,6 +83,7 @@ gulp.task('postcss', function() {
             atImport({
                 path: [process.cwd() + '\\node_modules\\',process.cwd() + './client/css']
             }),
+            precss(),
             autoprefixer(),
             csswring()
         ]))
