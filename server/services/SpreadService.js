@@ -107,7 +107,7 @@ SpreadService.prototype.fetchDoc = async function () {
                 callback: function (error, res, done) {
                     done();
                     if (error) {
-                        console.log('------------fetchDoc-------------')
+                        console.log('------------fetchDoc-------------');
                         console.log(error);
                         resolve(null);
                     } else {

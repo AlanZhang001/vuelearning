@@ -22,6 +22,8 @@ let router = require('./routes');
 
 let baseCtx = require('./middleware/BaseContext');
 
+let sqlConnection = require('./database');
+
 locale(app);
 
 baseCtx(app);
@@ -44,7 +46,7 @@ app.use(i18n(app,config.i18n));
 // 使用session
 app.use(session(config.session,app));
 
-app.use(async function(ctx, next) {
+app.use(async (ctx, next)=> {
 
     let n = ctx.session.views || 0;
     ctx.session.views = ++n;
@@ -61,6 +63,15 @@ app.use(async function(ctx, next) {
     await next();
 });
 
+// 初始化数据库，如果不存在连接则创建表
+app.use(async (ctx,next)=>{
+    let promises = [];
+    Object.values(sqlConnection).forEach(connetion=>{
+        promises.push(connetion.sync());
+    });
+    await Promise.all(promises);
+    await next();
+});
 
 // 装载路由
 router(app);
