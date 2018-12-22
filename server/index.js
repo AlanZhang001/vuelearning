@@ -34,9 +34,14 @@ app.use(json());
 app.use(bodyParser({
     multipart: true
 }));
+
+// 配置模板
 app.use(views(config.template.path, config.template.options));
+// 配置静态站点
 app.use(staticServe(config.staticDir.root,config.staticDir.options));
+// 配置i18n
 app.use(i18n(app,config.i18n));
+// 使用session
 app.use(session(config.session,app));
 
 app.use(async function(ctx, next) {
@@ -53,11 +58,8 @@ app.use(async function(ctx, next) {
         pv: ctx.session.views
     });
 
-
-
     await next();
 });
-
 
 
 // 装载路由
