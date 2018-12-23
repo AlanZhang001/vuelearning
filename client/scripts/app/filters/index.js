@@ -8,6 +8,7 @@
  * @returns {string} 日期格式化字符串或'--'
  */
 function formatDate(date, pattern = 'YYYY-MM-DD') {
+    console.log(date);
     if (!(date instanceof Date)) {
         date = new Date(date);
     }

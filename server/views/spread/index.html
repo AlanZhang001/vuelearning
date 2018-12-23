@@ -62,7 +62,7 @@
                                 <el-table-column prop="count" label="文件数量" width="150"> </el-table-column>
                                 <el-table-column prop="size" label="文件大小" width="150"> </el-table-column>
                             </el-table>
-                            <p class="sourceSite"><%=source%>：{{data.sourceSite}}</p>
+                            <p class="sourceSite"><%=source%>：{{data.sourceSite}} : {{data.list.length}}条</p>
                             <div class="tool">
                                 <el-button type="primary" icon="el-icon-download" @click="saveToBaiduYun" :disabled="canDownLoad===false">一键保存至百度云</el-button>
                             </div>
