@@ -1,14 +1,13 @@
-/*
- * [formatDate] 日期格式化
+/**
+ * 日期格式化
  * formatDate(new Date(1505459719825),'YYYY-MM-DD hh:mm:ss'); //'2017-09-15 15:15:19'
  * formatDate(new Date(1505459719825),'YYYY-M-D h:m:s'); //'2017-9-15 15:15:19'
  * formatDate(new Date(1505459719825),'YYYYMMDD hhmmss'); //'20170915 151519'
- * @param {date} date 日期对象，若不是date对象，此参数会直接拿去new Date
+ * @param {date} date [日期对象，若不是date对象，此参数会直接拿去new Date]
  * @param {string} pattern 格式化模式，比如'YYYY-MM-DD hh:mm:ss'，'YYYY-M-D h:m:s'；'MM'相对'M'，表示会自动补0
  * @returns {string} 日期格式化字符串或'--'
  */
 function formatDate(date, pattern = 'YYYY-MM-DD') {
-    console.log(date);
     if (!(date instanceof Date)) {
         date = new Date(date);
     }

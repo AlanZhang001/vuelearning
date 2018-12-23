@@ -7,7 +7,7 @@ import ElementUI from 'element-ui';
 import Vue from 'vue';
 import service from './service';
 import * as filters from './../filters';
-
+import ClipboardJS from 'clipboard';
 Vue.filter('dateformater',filters.formatDate);
 
 // 尽量靠后
@@ -34,6 +34,13 @@ new Vue({
             showBatchRes : false,
             batchsearching: false
         };
+    },
+    mounted() {
+        new ClipboardJS('#copyurl', {
+            text: (trigger)=>{
+                return this.dlList.join('\n');
+            }
+        });
     },
     methods: {
 
@@ -74,16 +81,11 @@ new Vue({
         },
         handleSelectionChange(arr) {
             this.multipleSelection = arr;
+            this.dlList = [];
             this.multipleSelection.forEach(item=>{
                 this.dlList.push(item.dl);
             });
             return this.dlList;
-        },
-        /**
-         * 保存至剪贴板
-         */
-        copytoclip(){
-
         },
         searchBatch(){
             this.showLoading();
