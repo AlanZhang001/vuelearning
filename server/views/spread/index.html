@@ -23,6 +23,11 @@
                             </el-input>
                         </div>
                         <el-button type="primary" @click="search">SEARCH</el-button>
+                        <template>
+                            <el-button type="primary" @click="searchBatch">自动抓取</el-button>
+                            <span v-if="showBatchRes">抓取到数据：{{increament}}条</span>
+                        </template>
+
                     </div>
 
                     <div

@@ -23,9 +23,14 @@ let config = {
         }
     },
     spiderConfig: {
+        tagList: [
+            'cjod','abp','xvsr','VRTM','T28','28TMP','EIKI','JKSR','MARA',
+            'mird','jufd','jux','SDDE','SOE','MIBD','MIAS','PGD','Madonna',
+            'MDYD','SDDE','SDDM','MIGD','PRED'
+        ],
         // 站点的爬虫设置
         spread: {
-            domain: 'http://cnbtspread.xyz',
+            domain: 'http://cnbtspread.co',
             // ua: 'Mozilla/5.0 (Linux;u;Android 4.2.2;zh-cn;) AppleWebKit/534.46 (KHTML,likeGecko) Version/5.1 Mobile Safari/10600.6.3 (compatible; Baiduspider/2.0;+http://www.baidu.com/search/spider.html)',
             // ua: 'Mozilla/5.0 (compatible; YandexBot/3.0; +http://yandex.com/bots)',
             // ua: 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_13_4) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/69.0.3497.100 Safari/537.36',

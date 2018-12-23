@@ -7,5 +7,6 @@ let router = new Router();
 router.prefix('/api');
 
 router.get('/getdoc/:name',SpreadController.getDoc);
+router.get('/batch',SpreadController.batchFetch);
 
 module.exports = router;

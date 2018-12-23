@@ -29,7 +29,10 @@ new Vue({
             timer: null,
             multipleSelection:[],
             dlList:[],
-            canDownLoad: false
+            canDownLoad: false,
+            increament:0,
+            showBatchRes : false,
+            batchsearching: false
         };
     },
     methods: {
@@ -54,7 +57,7 @@ new Vue({
         showLoading: function() {
             this.loading = true;
         },
-        hideLoading: function(timerCount=600) {
+        hideLoading: function(timerCount = 600) {
             this.timer && clearTimeout(this.timer);
             this.timer = setTimeout(() => {
                 this.loading = false;
@@ -73,6 +76,23 @@ new Vue({
             this.multipleSelection = arr;
             this.multipleSelection.forEach(item=>{
                 this.dlList.push(item.dl);
+            });
+            return this.dlList;
+        },
+        /**
+         * 保存至剪贴板
+         */
+        copytoclip(){
+
+        },
+        searchBatch(){
+            this.showLoading();
+            service.getDocAuto().then(res=>{
+                this.increament = res.data.list.length;
+                this.showLoading();
+            }).catch(err=>{
+                this.error(err);
+                this.hideLoading();
             });
         },
         saveToBaiduYun: function(){

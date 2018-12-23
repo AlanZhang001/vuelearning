@@ -25,7 +25,7 @@ module.exports = spread.define('movie_search', {
     dl: {
         comment: '电影的magnet下载路径',
         allowNull: false,
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         field: 'dl'
     },
     createdAt: {

@@ -9,8 +9,8 @@ SpreadController.getDoc = async function(ctx) {
         throw new Error('名称不能为空');
     }
 
-    let spreadService = new SpreadService(_name);
-    let result = await spreadService.getRes();
+    let spreadService = new SpreadService();
+    let result = await spreadService.getRes(_name);
 
     if (Array.isArray(result.list) && result.list.length > 0) {
         return ctx.JsonResponse.success(result);
@@ -20,4 +20,14 @@ SpreadController.getDoc = async function(ctx) {
         list:[]
     });
 
+};
+
+SpreadController.batchFetch = async function(ctx){
+    let spreadService = new SpreadService();
+    let list = await spreadService.fetchBatch();
+    return ctx.JsonResponse.success({
+        list,
+        sourceSite: '本地数据',
+        isFromCache: true
+    });
 };

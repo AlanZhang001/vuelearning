@@ -6,5 +6,10 @@ export default {
         }).then(function(response){
             return response.data;
         });
+    },
+    getDocAuto: function(){
+        return axios.get('/api/batch').then(function(response){
+            return response.data;
+        });
     }
 };
