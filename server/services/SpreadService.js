@@ -26,20 +26,20 @@ function SpreadService(mname) {
 SpreadService.prototype.getRes = async function () {
 
     // 通过爬虫去获取数据
-    let docStr = await this.fetchDoc();
-    let itemList = await this.fetchList(docStr);
+    // let docStr = await this.fetchDoc();
+    // let itemList = await this.fetchList(docStr);
 
-    itemList = await this.fetchDownlaodPages(itemList);
+    // itemList = await this.fetchDownlaodPages(itemList);
 
-    if (Array.isArray(itemList) && itemList.length > 0) {
-        // 将获取的数据同步至数据库
-        await this.syncDB(itemList);
-        return {
-            list: itemList,
-            sourceSite: this.spreadConfig.domain,
-            isFromCache: false
-        };
-    }
+    // if (Array.isArray(itemList) && itemList.length > 0) {
+    //     // 将获取的数据同步至数据库
+    //     await this.syncDB(itemList);
+    //     return {
+    //         list: itemList,
+    //         sourceSite: this.spreadConfig.domain,
+    //         isFromCache: false
+    //     };
+    // }
 
     let cacheList = await this.findFromDBByName(this.nameOriginal);
 

@@ -83,3 +83,6 @@ p{
     border-bottom: none;
     width: 100%;
 }
+.el-form--inline .el-form-item__content{
+    vertical-align: middle;
+}
