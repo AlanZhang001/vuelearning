@@ -2,6 +2,7 @@
  * testDemo
  *
  */
+import quicklink from "quicklink/dist/quicklink.mjs";
 
 import ElementUI from 'element-ui';
 import Vue from 'vue';
@@ -40,6 +41,13 @@ new Vue({
             text: (trigger)=>{
                 return this.dlList.join('\n');
             }
+        });
+
+        quicklink({
+            urls: [
+                'https://static.futunn.com/act/images/activity/tencent-music-vip/top-397b32371627a2307be834b6d76865dd.jpg',
+                'hhttps://static.futunn.com/act/images/common/topLogo-26780403448d5866f37d25356bab620e.svg'
+            ]
         });
     },
     methods: {

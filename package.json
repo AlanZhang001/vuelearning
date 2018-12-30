@@ -43,6 +43,7 @@
     "mysql2": "^1.6.1",
     "nconf": "~0.8.4",
     "normalize.css": "^5.0.0",
+    "quicklink": "^1.0.0",
     "redis": "^2.8.0",
     "request": "^2.79.0",
     "request-promise": "^4.1.1",
