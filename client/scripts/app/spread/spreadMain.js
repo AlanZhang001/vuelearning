@@ -2,7 +2,7 @@
  * testDemo
  *
  */
-import quicklink from "quicklink/dist/quicklink.mjs";
+import quicklink from 'quicklink/dist/quicklink.mjs';
 
 import ElementUI from 'element-ui';
 import Vue from 'vue';

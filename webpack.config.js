@@ -17,7 +17,7 @@ module.exports = env => {
                 'node_modules'
             ],
             alias: {
-                'vue': 'vue/dist/vue'
+                'vue': isProdEnv ? 'vue/dist/vue.min' : 'vue/dist/vue'
             }
         },
         resolveLoader: {
