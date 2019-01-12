@@ -49,7 +49,7 @@ SpreadService.prototype.getRes = async function (mname) {
 };
 
 /**
- * [从主动的站点获取获取完整的资源信息]
+ * [从指定的站点获取获取完整的资源信息]
  * @param {String} mname [电影名称]
  * @return {Array} [description]
  */
@@ -216,12 +216,15 @@ SpreadService.prototype.findFromDBByName = async function (name, isLike = true) 
 SpreadService.prototype.fetchBatch = async function(nameList){
     let baseTag = nameList || spreadConfig.tagList;
     let res = [];
-    baseTag.forEach(async tag=>{
-        let resList = await this.getResOnline(tag);
+    for(let i = 0,length = baseTag.length; i < length;i++){
+
+        let resList = await this.getResOnline(baseTag[i]);
         if(Array.isArray(resList) && resList.length > 0){
             res = res.concat(resList);
         }
-    });
+        console.log('search ' + baseTag[i]);
+        console.log('search result count ' + resList.length);
+    }
     return res;
 };
 
