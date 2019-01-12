@@ -15,13 +15,9 @@ const precss = require('precss');
 
 // 清理现有文件
 gulp.task('clean', function () {
-    return gulp.src(['client/scripts-build/', 'client/css-build'], { read: false })
+    return gulp.src(['todolist/scripts/dist/', 'todolist/css-build'], { read: false })
         .pipe(clean());
 });
-
-gulp.task('webpackDev-hot-reload', gulpShell.task([
-    'webpack-dev-server --hot --inline --config webpack.config.js'
-]));
 
 gulp.task('webpackDev', gulpShell.task([
     'webpack --progress --watch --config=webpack.config.js'
@@ -30,20 +26,6 @@ gulp.task('webpackDev', gulpShell.task([
 gulp.task('webpackProd', gulpShell.task([
     'webpack --env.prod --config=webpack.config.js'
 ]));
-
-// 清理现有dll文件
-gulp.task('cleanDll', function () {
-    return gulp.src(['./client/dll'], { read: false })
-        .pipe(clean());
-});
-
-gulp.task('webpackDll', ['cleanDll'], function (cb) {
-    exec('webpack -p --config webpack-dll.config.js', function (err, stdout, stderr) {
-        console.log('[webpackDll]stdout : ' + stdout);
-        console.log('[webpackDll]stderr : ' + stderr);
-        cb(err);
-    });
-});
 
 gulp.task('npm-prune', function(cb) {
     exec('npm prune', function(err, stdout, stderr) {
@@ -64,12 +46,12 @@ gulp.task('npm-install', function(cb) {
 
 // 静态资源版本号
 gulp.task('rev-hash', function() {
-    return gulp.src(['./client/views/**/*.html'],
+    return gulp.src(['./todolist/site/**/*.html'],
         {
             base: './'
         })
         .pipe(revHash({
-            assetsDir: 'client',
+            assetsDir: 'todolist',
             projectPath: './'
         }))
         .pipe(gulp.dest('./'));
@@ -77,17 +59,17 @@ gulp.task('rev-hash', function() {
 
 //压缩css
 gulp.task('postcss', function() {
-    return gulp.src(['./client/css/**/*.css'])
+    return gulp.src(['./todolist/css/source/**/*.css'])
         .pipe(plumber())
         .pipe(postcss([
             atImport({
-                path: [process.cwd() + '\\node_modules\\',process.cwd() + './client/css']
+                path: [process.cwd() + '\\node_modules\\',process.cwd() + './todolist/css']
             }),
             precss(),
             autoprefixer(),
             csswring()
         ]))
-        .pipe(gulp.dest('./client/css-build'));
+        .pipe(gulp.dest('./todolist/css-build'));
 
 }).on('error', function(e) {
     console.log('buildError\n', e);
@@ -95,7 +77,7 @@ gulp.task('postcss', function() {
 
 gulp.task('watchCss', function() {
     return gulp.watch([
-        './client/css/**/*.css'
+        './todolist/css/**/*.css'
     ], ['postcss']);
 });
 
@@ -104,21 +86,10 @@ gulp.task('dev', function() {
     return runSequence('npm-prune', 'clean', 'postcss','watchCss', 'webpackDev');
 });
 
-// 前端开发环境构建任务
-gulp.task('d', function() {
-    return runSequence('npm-prune','clean', 'postcss','watchCss', 'webpackDev-hot-reload');
-});
 
 gulp.task('default', ['dev']);
 
 // 生产环境构建任务
 gulp.task('prod', function() {
-    return runSequence('npm-prune', 'npm-install', 'clean', 'postcss', 'webpackProd', 'rev-hash');
-});
-
-gulp.task('pub', ['prod']);
-
-// CI构建任务
-gulp.task('ci', function() {
     return runSequence('npm-prune', 'npm-install', 'clean', 'postcss', 'webpackProd', 'rev-hash');
 });
