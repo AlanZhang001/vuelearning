@@ -53,8 +53,8 @@ module.exports = env => {
             }]
         },
         devtool: isProdEnv ? 'hidden-source-map' : 'source-map',
-        plugins: [
-            isProdEnv ? new UglifyJsPlugin({
+        plugins: isProdEnv ?
+            [new UglifyJsPlugin({
                 parallel: true,
                 cache: path.resolve(__dirname, './.tmp/jscache2'),
                 uglifyOptions: {
@@ -62,10 +62,11 @@ module.exports = env => {
                         drop_console: true
                     }
                 }
-            }) : null
-        ],
+            })]:
+            undefined
+        ,
         output: {
-            path: path.resolve(__dirname, './client/scripts/dist'),
+            path: path.resolve(__dirname, './todolist/scripts/dist'),
             filename: '[name].js',
             // Tells webpack to include comments in bundles with information about the contained modules
             pathinfo: isProdEnv ? false : true
