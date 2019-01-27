@@ -23,7 +23,12 @@ var MyComponent = Vue.extend({
 // 所有的 `MyComponent` 实例都将以预定义的扩展选项被创建
 var myComponentInstance = new MyComponent()
 ```
-##### 5. Mustache`{{}}` 不能在 HTML 属性中使用，应使用 v-bind 指令
+##### 5. 表达式插值
+
+- Mustache`{{}}` 不能在 HTML 属性中使用，应使用 v-bind 指令
+- `{{}}`每个绑定都只能包含单个表达式，就是执行后必须得到一个值，`return,var `等是无法正确解析的
+- 模板表达式放置在沙盒中，只能访问全局变量的一个白名单列表，如 Math 和 Date。在模板表达式中，你不应该试图访问用户定义的全局变量。
+
 ##### 6. 使用 key 控制元素的可重用
 ![img](asserts/reuse.png)
 ##### 7. 由于 JavaScript 的限制， Vue 不能检测以下变动的数组
@@ -32,8 +37,14 @@ var myComponentInstance = new MyComponent()
 ![img](asserts/model.png)
 ##### 9. 在属性是布尔类型的一些情况中，v-bind 的作用有点不同，只要值存在就会隐含为 true
 ![img](asserts/bind.png)
-##### 10 关于component
+##### 10. 关于component
 - data 必须是一个函数
+##### 11. 为什么监听器会放在 HTML 中？
+- 通过浏览 HTML 模板，就能很方便地找到在 JavaScript 代码里对应的处理函数。
+- 由于无须在 JavaScript 里手动绑定事件，你的 ViewModel 代码可以是非常纯粹的逻辑，并且和 DOM 完全解耦，更易于测试。
+- 当一个 ViewModel 被销毁时，所有的事件监听器都会被自动删除。你无须担心如何自己清理它们。
+##### 12. 表单绑定
+- 对于需要使用输入法的语言（中文、日文、韩文等），你会发现，在输入法字母组合窗口输入时，v-model 并不会触发数据更新。如果想在此输入过程中，满足更新数据的需求，需要使用 input 事件。
 
 ### 其他常见问题
 - [解说vue开发过程中的“深坑”](https://zhuanlan.zhihu.com/p/39398459)
